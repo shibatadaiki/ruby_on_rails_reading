@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# バージョン切り替わるたびにここを書き換えている感じ・・・？
+# だとしたらなかなか愚直なような
 module ActiveModel
   # Returns the version of the currently loaded \Active \Model as a <tt>Gem::Version</tt>
   def self.gem_version
