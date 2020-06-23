@@ -49,6 +49,8 @@ module ActiveModel
   # つまり「ActiveModel」をincludeしておけば、ActiveModelがいつでも必要なタイミング（そのモジュールのメソッドが呼び出されたタイミング？）
   # で、モジュールをロードしてメソッドを使えるようにしてくれる。。みたいな感じ。たぶん。
   # 第一引数 -> あるクラスの名前 第二引数 -> 読み込みするファイル（ただし第二引数は規約から推測可能。省略可能）
+
+  # ~/activemodel/lib/active_model/attribute.rb
   autoload :Attribute
   autoload :Attributes
   autoload :AttributeAssignment
@@ -103,6 +105,10 @@ end
 
 # ~/activemodel/lib/active_model/locale/en.yml をロード.
 # model処理のバリデーションメッセージ設定
+#
+# on_loadはlazy_load_hooksという遅延処理に関連するモジュールのメソッド
+# 対象スコープとなるモジュールが読み込まれた後でblockに渡した処理を遅延実行できる
+# https://qiita.com/iwsksky/items/cfca74f08e10fe3e2eb8
 ActiveSupport.on_load(:i18n) do
   I18n.load_path << File.expand_path("active_model/locale/en.yml", __dir__)
 end
