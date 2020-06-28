@@ -2,36 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eef7a46e-f152-42de-8fd6-047dfed8c8fc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/MIT-LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/MIT-LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/README.rdoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/Rakefile" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/Rakefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/activemodel.gemspec" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/activemodel.gemspec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/bin/test" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/bin/test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/attribute.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/attribute.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/gem_version.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/gem_version.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/locale/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/locale/en.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/big_integer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/big_integer.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/boolean.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/boolean.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/binary.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/binary.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/date.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/date.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/date_time.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/date_time.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/helpers.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/helpers.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/helpers/accepts_multiparameter_time.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/helpers/accepts_multiparameter_time.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/helpers/timezone.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/helpers/timezone.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/registry.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/registry.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/version.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/version.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/cases/attribute_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/cases/attribute_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/models/account.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/models/account.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/models/blog_post.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/models/blog_post.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/models/custom_reader.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/models/custom_reader.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/models/helicopter.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/models/helicopter.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/models/person.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/models/person.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/models/sheep.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/models/sheep.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/models/track_back.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/models/track_back.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/models/user.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/models/visitor.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/models/visitor.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/validators/email_validator.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/validators/email_validator.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/validators/namespace/email_validator.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/validators/namespace/email_validator.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activesupport/lib/active_support/core_ext/object/duplicable.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activesupport/lib/active_support/core_ext/object/duplicable.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +34,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -80,7 +61,9 @@
       <updated>1587215452287</updated>
       <workItem from="1587215454795" duration="1176000" />
       <workItem from="1587226814728" duration="21000" />
-      <workItem from="1592834733757" duration="18617000" />
+      <workItem from="1592834733757" duration="28659000" />
+      <workItem from="1593363477151" duration="213000" />
+      <workItem from="1593363886908" duration="224000" />
     </task>
     <servers />
   </component>
@@ -88,10 +71,15 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2259" y="190" width="762" height="518" key="find.popup" timestamp="1592947957550">
+    <state x="2149" y="88" key="SettingsEditor" timestamp="1593364115146">
       <screen x="1680" y="-91" width="1920" height="1080" />
     </state>
-    <state x="2259" y="190" width="762" height="518" key="find.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1592947957550" />
+    <state x="2149" y="88" key="SettingsEditor/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593364063723" />
+    <state x="2149" y="88" key="SettingsEditor/1680.-91.1920.1080/0.23.1680.1027@1680.-91.1920.1080" timestamp="1593364115146" />
+    <state x="2259" y="190" width="762" height="518" key="find.popup" timestamp="1593306234964">
+      <screen x="1680" y="-91" width="1920" height="1080" />
+    </state>
+    <state x="2259" y="190" width="762" height="518" key="find.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593306234964" />
     <state x="2305" y="150" width="670" height="676" key="search.everywhere.popup" timestamp="1592840910247">
       <screen x="1680" y="-91" width="1920" height="1080" />
     </state>

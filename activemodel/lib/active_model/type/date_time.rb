@@ -3,8 +3,14 @@
 module ActiveModel
   module Type
     class DateTime < Value # :nodoc:
+      # Helpers::Timezone -> ~/activemodel/lib/active_model/type/helpers/timezone.rb
+      # utcかそうでないかを判定するモジュール
       include Helpers::Timezone
       include Helpers::TimeValue
+      # Helpers::AcceptsMultiparameterTime.new -> ~/active_model/type/helpers/accepts_multiparameter_time.rb
+      # マルチパラメータ時間を受け入れるモジュール。Hashだったらvalue_from_multiparameter_assignmentを起動させるためのモジュール
+      # デフォルト時間を設定できる（引数を受け入れられる）ようインスタンスのそれをモジュールみたく使っている？？
+      # DateTimeは日付を扱うので第4、第5引数（時間、分）の初期値が設定されている
       include Helpers::AcceptsMultiparameterTime.new(
         defaults: { 4 => 0, 5 => 0 }
       )

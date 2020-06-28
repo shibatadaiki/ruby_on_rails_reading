@@ -173,10 +173,10 @@ module ActiveModel
       end
 
       # ここから各種孫クラス
-      # これらのcast変換の機能によって、数字を扱う属性値（カラム）に文字列を入れたら数字になる、みたいなRailsの処理を使うことができる！
+      # これらのcast変換の機能によって、「数字を扱う属性値（カラム）に文字列を入れたら数字になる」、みたいなRailsの処理を使うことができる！
       class FromDatabase < Attribute # :nodoc:
         # DB由来のオブジェクト（User.firstとかで最初に引っ張ってきたときの処理ぽい）ならdeserialize（オブジェクトの型に復元）する
-        # （DBから引っ張ってきた値は初期状態ではシリアライズされているからそれを初期化時に戻す値負う感じ。たぶん）
+        # （DBから引っ張ってきた値は初期状態ではシリアライズされているからそれを初期化時に戻す感じ。たぶん）
         # 「シリアライズ（serialize）とは、プログラミングでオプジェクト化されたデータを、
         # ファイルやストレージに保存したり、ネットワークで送受信したりできるような形に変換することを言います。」
         # http://cloudcafe.tech/?p=2639
@@ -191,6 +191,19 @@ module ActiveModel
 
       class FromUser < Attribute # :nodoc:
         # user由来のオブジェクト（User.newとかでRailsの世界で作られた値の処理ぽい）ならcast（変換）メソッドのみを起動
+        # cast例
+        # https://qiita.com/natsuokawai/items/5ac1a9704805ff17b3f2
+        #
+        # [3] pry(main)> c.checked
+        #  => false
+        #[4] pry(main)> c.checked = 1
+        #  => 1
+        #[5] pry(main)> c.checked
+        #  => true (数字がT/Fにキャストされている)
+        #[6] pry(main)> c.checked = "off"
+        #  => "off"
+        #[7] pry(main)> c.checked
+        #  => false (文字列が特殊な加工を経てT/Fにキャストされている)
         def type_cast(value)
           type.cast(value)
         end

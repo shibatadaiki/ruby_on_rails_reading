@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 # 各種型タイプ
+
+# ヘルパー的処理
 require "active_model/type/helpers"
 require "active_model/type/value"
 
+# 各種オーバーライド
 require "active_model/type/big_integer"
 require "active_model/type/binary"
 require "active_model/type/boolean"
@@ -39,8 +42,21 @@ module ActiveModel
       end
     end
 
-    # 各種クラスを登録する
-    # 受け取った値を各クラスの値に変換する
+    # 各種属性に付与する型クラスを登録する
+    # 型登録がされた属性が初期化されるとcastメソッドが起動し、値に登録された型cast処理をかける
+    # cast例
+    # https://qiita.com/natsuokawai/items/5ac1a9704805ff17b3f2
+    #
+    # [3] pry(main)> c.checked
+    #  => false
+    #[4] pry(main)> c.checked = 1
+    #  => 1
+    #[5] pry(main)> c.checked
+    #  => true (数字がT/Fにキャストされている)
+    #[6] pry(main)> c.checked = "off"
+    #  => "off"
+    #[7] pry(main)> c.checked
+    #  => false (文字列が特殊な加工を経てT/Fにキャストされている)
     register(:big_integer, Type::BigInteger)
     register(:binary, Type::Binary)
     register(:boolean, Type::Boolean)
