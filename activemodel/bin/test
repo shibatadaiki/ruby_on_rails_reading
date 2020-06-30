@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+# /Users/xxxxxxxxx/rails-master/tools/test.rbをrequireしてテストコマンドが実行できるようにしている？
+
 COMPONENT_ROOT = File.expand_path("..", __dir__)
+
+# 現在のファイルからの相対パスで require。
+# 実行したいファイル(ここではtest.rb)のディレクトリからの相対パスで該当のファイルを探しに行く
+# https://docs.ruby-lang.org/ja/latest/method/Kernel/m/require_relative.html
 require_relative "../../tools/test"
