@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# passwordを持ったテストユーザー？のclass Userを定義
 class User
   extend ActiveModel::Callbacks
   include ActiveModel::SecurePassword
@@ -12,6 +13,8 @@ class User
   attr_accessor :password_digest, :recovery_password_digest
   attr_accessor :password_called
 
+  # passwordが呼ばれた回数を計算している（x回間違えたらロック的な機能を試すため？？）
+  # visitorは制限ないけどuser歯あるみたいな感じで差異のテストをするのだろうか
   def password=(unencrypted_password)
     self.password_called ||= 0
     self.password_called += 1

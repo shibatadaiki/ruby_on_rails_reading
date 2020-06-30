@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# バリデーションチェックが正常に効いているかを確認するテストに用いるClass?
 class CustomReader
   include ActiveModel::Validations
 
