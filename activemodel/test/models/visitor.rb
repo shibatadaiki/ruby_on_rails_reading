@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# passwordを持ったテストユーザー？のclass Visitorを定義
 class Visitor
   extend ActiveModel::Callbacks
   include ActiveModel::SecurePassword

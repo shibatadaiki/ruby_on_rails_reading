@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# 各種型タイプ
 require "active_model/type/helpers"
 require "active_model/type/value"
 
@@ -24,7 +25,7 @@ module ActiveModel
     class << self
       attr_accessor :registry # :nodoc:
 
-      # Add a new type to the registry, allowing it to be gotten through ActiveModel::Type#lookup
+      # レジストリに新しいタイプを追加し、ActiveModel :: Type＃lookupを介して取得できるようにします。
       def register(type_name, klass = nil, **options, &block)
         registry.register(type_name, klass, **options, &block)
       end
@@ -38,6 +39,8 @@ module ActiveModel
       end
     end
 
+    # 各種クラスを登録する
+    # 受け取った値を各クラスの値に変換する
     register(:big_integer, Type::BigInteger)
     register(:binary, Type::Binary)
     register(:boolean, Type::Boolean)

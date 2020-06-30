@@ -8,12 +8,18 @@ module ActiveModel
         @registrations = []
       end
 
+      # registerメソッドを用いることで型の登録ができる
+      # https://wat-aro.hatenablog.com/entry/2018/08/07/203114
       def register(type_name, klass = nil, **options, &block)
         block ||= proc { |_, *args| klass.new(*args) }
+        # キーワード引数を Hash の形式で渡した場合に warning が出るのでその対策らしい？
+        # https://tmtms.hatenablog.com/entry/201912/ruby27-module
         block.ruby2_keywords if block.respond_to?(:ruby2_keywords)
+        # 初期読み込みの際にregistrations配列に使用する型をぼんぼん登録していくらしい
         registrations << registration_klass.new(type_name, block, **options)
       end
 
+      # 検索？
       def lookup(symbol, *args, **kwargs)
         registration = find_registration(symbol, *args, **kwargs)
 
@@ -44,6 +50,7 @@ module ActiveModel
       end
 
       def call(_registry, *args, **kwargs)
+        # ここのcallで[Object].newする
         if kwargs.any? # https://bugs.ruby-lang.org/issues/10856
           block.call(*args, **kwargs)
         else

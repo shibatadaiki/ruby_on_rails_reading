@@ -1,18 +1,26 @@
 # frozen_string_literal: true
 
+# active_supportの便利メソッドを使用している
 require "active_support/core_ext/object/duplicable"
 
 module ActiveModel
+  # 属性値操作の汎用的な機能の追加
   class Attribute # :nodoc:
+
+    # メソッドで孫クラスのインスタンスを返している
     class << self
+      # ここの引数の「value」は属性値ではなくてメソッドから返却される値なので注意
+      # from_database -> ActiveRecord(SQL)を基に生成されたオブジェクト？
       def from_database(name, value, type)
         FromDatabase.new(name, value, type)
       end
 
+      # from_database -> ユーザーが作成したモデルを基に生成されたオブジェクト？
       def from_user(name, value, type, original_attribute = nil)
         FromUser.new(name, value, type, original_attribute)
       end
 
+      # キャスト変換済という意味？
       def with_cast_value(name, value, type)
         WithCastValue.new(name, value, type)
       end
@@ -28,17 +36,20 @@ module ActiveModel
 
     attr_reader :name, :value_before_type_cast, :type
 
-    # This method should not be called directly.
-    # Use #from_database or #from_user
+    # このメソッドは直接呼び出さないでください。#from_databaseまたは#from_userを使用します
     def initialize(name, value_before_type_cast, type, original_attribute = nil)
       @name = name
       @value_before_type_cast = value_before_type_cast
+      # Type::Value.new, Type::String.new, Type::Integer.newなどの
+      # ~/activemodel/lib/active_model/type/***.rbのオブジェクトが引数になる
+      # （というか普通にRubyの型オブジェクトを引数にとる。Railsのそれは各種モンキーパッチメソッドが付与されているだけ。たぶん）
       @type = type
       @original_attribute = original_attribute
     end
 
     def value
-      # `defined?` is cheaper than `||=` when we get back falsy values
+      # 偽の値を返す場合、 `defined？（「定義された？」）`は `|| =`よりも安価です。
+      # type_cast -> 各孫クラスごとにそれぞれのvalue加工（型変換）の処理をする
       @value = type_cast(value_before_type_cast) unless defined?(@value)
       @value
     end
@@ -67,6 +78,7 @@ module ActiveModel
       with_value_from_database(value_for_database)
     end
 
+    # 各種インスタンス生成（nullとuninitializedはまた別）
     def with_value_from_user(value)
       type.assert_valid_value(value)
       self.class.from_user(name, value, type, original_attribute || self)
@@ -88,6 +100,7 @@ module ActiveModel
       end
     end
 
+    # Attributeクラスのメソッドが直接呼び出されたらエラーになる
     def type_cast(*)
       raise NotImplementedError
     end
@@ -159,7 +172,14 @@ module ActiveModel
         type.serialize(original_value)
       end
 
+      # ここから各種孫クラス
+      # これらのcast変換の機能によって、数字を扱う属性値（カラム）に文字列を入れたら数字になる、みたいなRailsの処理を使うことができる！
       class FromDatabase < Attribute # :nodoc:
+        # DB由来のオブジェクト（User.firstとかで最初に引っ張ってきたときの処理ぽい）ならdeserialize（オブジェクトの型に復元）する
+        # （DBから引っ張ってきた値は初期状態ではシリアライズされているからそれを初期化時に戻す値負う感じ。たぶん）
+        # 「シリアライズ（serialize）とは、プログラミングでオプジェクト化されたデータを、
+        # ファイルやストレージに保存したり、ネットワークで送受信したりできるような形に変換することを言います。」
+        # http://cloudcafe.tech/?p=2639
         def type_cast(value)
           type.deserialize(value)
         end
@@ -170,6 +190,7 @@ module ActiveModel
       end
 
       class FromUser < Attribute # :nodoc:
+        # user由来のオブジェクト（User.newとかでRailsの世界で作られた値の処理ぽい）ならcast（変換）メソッドのみを起動
         def type_cast(value)
           type.cast(value)
         end
@@ -179,6 +200,7 @@ module ActiveModel
         end
       end
 
+      # すでにキャスト済ならそのままvalueを返す
       class WithCastValue < Attribute # :nodoc:
         def type_cast(value)
           value
@@ -242,6 +264,9 @@ module ActiveModel
         end
       end
 
+      # Ruby で内部クラスを private にする
+      # Attribute class内部で定義された各種孫classをprivateに設定する
+      # https://secret-garden.hatenablog.com/entry/2017/08/09/214431
       private_constant :FromDatabase, :FromUser, :Null, :Uninitialized, :WithCastValue
   end
 end
