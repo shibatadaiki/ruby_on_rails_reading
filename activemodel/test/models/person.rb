@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# 翻訳機能のテストのために用いられるクラスのよう
 class Person
   include ActiveModel::Validations
   extend  ActiveModel::Translation

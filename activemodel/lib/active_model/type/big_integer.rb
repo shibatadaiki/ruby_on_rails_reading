@@ -6,6 +6,7 @@ module ActiveModel
   module Type
     class BigInteger < Integer # :nodoc:
       private
+        # max_valueが追加されている
         def max_value
           ::Float::INFINITY
         end
