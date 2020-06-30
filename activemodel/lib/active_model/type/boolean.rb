@@ -13,6 +13,8 @@ module ActiveModel
     #＃-"false"、 "f"、 "0"、+ 0+、または+ FALSE_VALUES +の他の値は+ false +に強制変換されます
     #＃-空の文字列は+ nil +に強制変換されます
     #＃-他のすべての値は+ true +に強制されます
+
+    # オブジェクトの属性に型定義された時の処理をするためのClass
     class Boolean < Value
       # これらをfalseとして扱う
       FALSE_VALUES = [

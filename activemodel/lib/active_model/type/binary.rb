@@ -2,6 +2,7 @@
 
 module ActiveModel
   module Type
+    # オブジェクトの属性に型定義された時の処理をするためのClass
     # Date型だったら文字列型に変換する機能を追加
     class Binary < Value # :nodoc:
       def type

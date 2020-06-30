@@ -4,6 +4,7 @@ require "active_support/core_ext/object/try"
 
 module ActiveModel
   module Type
+    # オブジェクトの属性に型定義された時の処理をするためのClass
     class Float < Value # :nodoc:
       include Helpers::Numeric
 

@@ -5,8 +5,14 @@ require "cases/helper"
 module ActiveModel
   module Type
     class StringTest < ActiveModel::TestCase
+      # 「型キャスト」をテストする
+      # 「データベースの型キャスト」をテストする
+      # 「キャスト文字列は変更可能」をテストする
+      # テスト「値は出てきます」が実行されます
+
       test "type casting" do
         type = Type::String.new
+        # castで変更される
         assert_equal "t", type.cast(true)
         assert_equal "f", type.cast(false)
         assert_equal "123", type.cast(123)
@@ -15,6 +21,7 @@ module ActiveModel
       test "type casting for database" do
         type = Type::String.new
         object, array, hash = Object.new, [true], { a: :b }
+        # serializeで変更される
         assert_equal object, type.serialize(object)
         assert_equal array, type.serialize(array)
         assert_equal hash, type.serialize(hash)
@@ -35,6 +42,7 @@ module ActiveModel
       test "values are duped coming out" do
         type = Type::String.new
 
+        # 値は変えない。同じではないが等しい
         s = "foo"
         assert_not_same s, type.cast(s)
         assert_equal s, type.cast(s)

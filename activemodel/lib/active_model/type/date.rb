@@ -2,6 +2,7 @@
 
 module ActiveModel
   module Type
+    # オブジェクトの属性に型定義された時の処理をするためのClass
     class Date < Value # :nodoc:
       # Helpers::Timezone -> ~/activemodel/lib/active_model/type/helpers/timezone.rb
       # utcかそうでないかを判定するモジュール
@@ -11,6 +12,8 @@ module ActiveModel
       # デフォルト時間を設定できる（引数を受け入れられる）ようインスタンスのそれをモジュールみたく使っている。
       # Dateは日付を扱うので第4、第5引数（時間、分）などは省略されている
       include Helpers::AcceptsMultiparameterTime.new
+
+      # DateTimeとTimeにinclude Helpers::TimeValueがあってこちらにないのは時間がDateにないから
 
       # 各型クラスにある型名シンボル返すやつ
       def type
@@ -41,13 +44,18 @@ module ActiveModel
         end
 
         ISO_DATE = /\A(\d{4})-(\d\d)-(\d\d)\z/
+        # 日にちまでの高速文字列
         def fast_string_to_date(string)
           if string =~ ISO_DATE
             new_date $1.to_i, $2.to_i, $3.to_i
           end
         end
 
+        # 現在日付までのフォールバック文字列
         def fallback_string_to_date(string)
+          # https://docs.ruby-lang.org/ja/latest/method/Hash/i/values_at.html
+          # 引数で指定されたキーに対応する値の配列を返します。
+          # yy-mm-ddの部分を抽出して返す
           new_date(*::Date._parse(string, false).values_at(:year, :mon, :mday))
         end
 

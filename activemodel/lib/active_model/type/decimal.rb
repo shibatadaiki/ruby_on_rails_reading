@@ -4,6 +4,7 @@ require "bigdecimal/util"
 
 module ActiveModel
   module Type
+    # オブジェクトの属性に型定義された時の処理をするためのClass
     class Decimal < Value # :nodoc:
       include Helpers::Numeric
       BIGDECIMAL_PRECISION = 18

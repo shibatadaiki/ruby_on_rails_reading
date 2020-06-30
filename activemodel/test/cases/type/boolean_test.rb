@@ -6,10 +6,12 @@ module ActiveModel
   module Type
     class BooleanTest < ActiveModel::TestCase
       def test_type_cast_boolean
+        # type.cast -> Type::Boolean.new.cast_valueの処理がType::Valueのcastメソッドで処理が行われる
         type = Type::Boolean.new
         assert_predicate type.cast(""), :nil?
         assert_predicate type.cast(nil), :nil?
 
+        # cast_value処理の確認
         assert type.cast(true)
         assert type.cast(1)
         assert type.cast("1")
