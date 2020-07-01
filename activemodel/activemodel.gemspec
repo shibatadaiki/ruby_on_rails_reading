@@ -1,3 +1,5 @@
+# done
+
 # activemodelというgemの情報
 
 # frozen_string_literal: true

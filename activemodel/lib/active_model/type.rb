@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 # 各種型タイプ

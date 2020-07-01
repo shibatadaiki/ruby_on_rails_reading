@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 # testで使う用のEmailValidatorクラスを定義し、そのメソッドでメールアドレスのバリデーションエラーを発生させる

@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 # passwordを持ったテストユーザー？のclass Userを定義

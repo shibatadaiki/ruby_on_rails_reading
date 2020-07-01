@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 # バージョン切り替わるたびにここを書き換えている感じ・・・？

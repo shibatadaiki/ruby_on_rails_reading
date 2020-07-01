@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 # test使用用のクラスを作成？

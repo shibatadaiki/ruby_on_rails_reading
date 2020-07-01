@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 # active_supportの便利メソッドを使用している
