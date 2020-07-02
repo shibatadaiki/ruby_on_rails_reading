@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="eef7a46e-f152-42de-8fd6-047dfed8c8fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/decimal.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/decimal.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/helpers/numeric.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/helpers/numeric.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/integer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/integer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/attribute_assignment.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/attribute_assignment.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/value.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/value.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/cases/type/date_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/cases/type/date_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/cases/type/date_time_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/cases/type/date_time_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/cases/type/float_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/cases/type/float_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/cases/type/integer_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/cases/type/integer_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/test/cases/type/time_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/test/cases/type/time_test.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

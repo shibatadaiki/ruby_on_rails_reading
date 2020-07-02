@@ -52,6 +52,9 @@ module ActiveModel
     def value
       # 偽の値を返す場合、 `defined？（「定義された？」）`は `|| =`よりも安価です。
       # type_cast -> 各孫クラスごとにそれぞれのvalue加工（型変換）の処理をする
+
+      # Attribute.type_cast(value_before_type_cast) => TypeObject.cast_value(value_before_type_cast)
+      # 各TypeのObjectのcastメソッドを、引数をvalue_before_type_castで起動して、Attributeの@valueを生成する
       @value = type_cast(value_before_type_cast) unless defined?(@value)
       @value
     end

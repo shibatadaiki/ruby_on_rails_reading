@@ -12,6 +12,14 @@ module ActiveModel
     # If the passed hash responds to <tt>permitted?</tt> method and the return value
     # of this method is +false+ an <tt>ActiveModel::ForbiddenAttributesError</tt>
     # exception is raised.
+
+    # ＃属性のハッシュを渡すことですべての属性を設定できます
+    #     ＃属性名に一致するキー。
+    #     ＃
+    #     ＃渡されたハッシュが<tt> permitted？</ tt>メソッドと戻り値に応答する場合
+    #     このメソッドの＃は+ false +です<tt> ActiveModel :: ForbiddenAttributesError </ tt>
+    #     ＃例外が発生します。
+
     #
     #   class Cat
     #     include ActiveModel::AttributeAssignment
@@ -25,6 +33,7 @@ module ActiveModel
     #   cat.assign_attributes(status: "sleeping")
     #   cat.name # => 'Gorby'
     #   cat.status # => 'sleeping'
+
     def assign_attributes(new_attributes)
       unless new_attributes.respond_to?(:each_pair)
         raise ArgumentError, "When assigning attributes, you must pass a hash as an argument, #{new_attributes.class} passed."
@@ -34,6 +43,7 @@ module ActiveModel
       _assign_attributes(sanitize_for_mass_assignment(new_attributes))
     end
 
+    # attributes= で引数のハッシュ値で #{k}=v のループ処理で属性値を書き換える
     alias attributes= assign_attributes
 
     private

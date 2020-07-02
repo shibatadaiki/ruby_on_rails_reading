@@ -21,6 +21,7 @@ require "active_model/type/integer"
 require "active_model/type/string"
 require "active_model/type/time"
 
+# https://wat-aro.hatenablog.com/entry/2018/08/07/203114
 require "active_model/type/registry"
 
 module ActiveModel

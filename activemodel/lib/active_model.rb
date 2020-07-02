@@ -51,7 +51,7 @@ module ActiveModel
   # 第一引数 -> あるクラスの名前 第二引数 -> 読み込みするファイル（ただし第二引数は規約から推測可能。省略可能）
 
   # ~/activemodel/lib/active_model/attribute.rb
-  autoload :Attribute
+  autoload :Attribute # 属性値操作の汎用的な機能
   autoload :Attributes
   autoload :AttributeAssignment
   autoload :AttributeMethods
@@ -68,7 +68,7 @@ module ActiveModel
   autoload :SecurePassword
   autoload :Serialization
   autoload :Translation
-  autoload :Type
+  autoload :Type # 値（属性）に型を付与してcast処理をかけて、値の定義づけ？をする
   autoload :Validations
   autoload :Validator
 

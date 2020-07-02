@@ -2,6 +2,8 @@
 
 module ActiveModel
   # Raised when forbidden attributes are used for mass assignment.
+  # 禁止属性が一括割り当てに使用されている場合に発生します。
+
   #
   #   class Person < ActiveRecord::Base
   #   end
@@ -19,6 +21,7 @@ module ActiveModel
   module ForbiddenAttributesProtection # :nodoc:
     private
       def sanitize_for_mass_assignment(attributes)
+        # permitted?できる値形式なのにされていなかったらError
         if attributes.respond_to?(:permitted?)
           raise ActiveModel::ForbiddenAttributesError if !attributes.permitted?
           attributes.to_h
