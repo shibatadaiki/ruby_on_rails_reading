@@ -1,5 +1,23 @@
 # frozen_string_literal: true
 
+#　       「単純な値」をテストする
+#       「nilにキャストされたランダムオブジェクト」をテストする
+#       「to_iなしでオブジェクトをキャストする」テスト
+#       「キャスティングナンとインフィニティ」のテスト
+#       「データベースのブール値をキャストする」テスト
+#       「キャスト時間」をテストする
+#       「データベースのキャスト文字列」をテストします
+#       「空の文字列をキャストする」テスト
+#       「変更されましたか？」 行う
+#       テスト「int最小値未満の値は範囲外です」
+#       テスト「int最大値を超える値は範囲外です」
+#       「非常に小さな数は範囲外」のテスト
+#       「非常に大きな数は範囲外」のテスト
+#       「通常の数値は範囲内にある」テスト
+#       「int最大値が範囲内にある」テスト
+#       「int最小値が範囲内にある」テスト
+#       「制限が大きい列の範囲が大きい」というテスト
+
 require "cases/helper"
 require "active_support/core_ext/numeric/time"
 
@@ -68,8 +86,10 @@ module ActiveModel
       test "changed?" do
         type = Type::Integer.new
 
+        # 値を完全に書き換えたらchanged?
         assert type.changed?(0, 0, "wibble")
         assert type.changed?(5, 0, "wibble")
+        # 値自体がそのままであれば!changed?
         assert_not type.changed?(5, 5, "5wibble")
         assert_not type.changed?(5, 5, "5")
         assert_not type.changed?(5, 5, "5.0")

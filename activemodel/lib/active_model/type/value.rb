@@ -117,6 +117,9 @@ module ActiveModel
         # Convenience method for types which do not need separate type casting
         # behavior for user and database inputs. Called by Value#cast for
         # values except +nil+.
+        # ＃個別の型キャストを必要としない型の簡易メソッド
+        # ＃ユーザーおよびデータベース入力の動作。 Value＃castによって呼び出されます
+        # ＃+ nil +以外の値。
         def cast_value(value) # :doc:
           value
         end
