@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 #　       「単純な値」をテストする
