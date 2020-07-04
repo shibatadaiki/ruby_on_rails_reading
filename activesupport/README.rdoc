@@ -1,3 +1,5 @@
+done
+
 = Active Support -- Utility classes and Ruby extensions from Rails
 
 Active Support is a collection of utility classes and standard library
@@ -36,5 +38,46 @@ Bug reports for the Ruby on Rails project can be filed here:
 * https://github.com/rails/rails/issues
 
 Feature requests should be discussed on the rails-core mailing list here:
+
+* https://discuss.rubyonrails.org/c/rubyonrails-core
+
+=アクティブサポート-RailsのユーティリティクラスとRuby拡張機能
+
+アクティブサポートはユーティリティクラスと標準ライブラリのコレクションです
+Railsフレームワークに役立つことが判明した拡張機能。これらの追加
+Rubyプロジェクトに必要に応じてロードできるように、このパッケージに常駐します
+Railsの外。
+
+拡張機能の詳細については、{アクティブサポートコア拡張機能} [https://edgeguides.rubyonrails.org/active_support_core_extensions.html]ガイドをご覧ください。
+
+==ダウンロードとインストール
+
+RubyGemsを使用すると、アクティブサポートの最新バージョンをインストールできます。
+
+  $ gem install activesupport
+
+ソースコードは、GitHubのRailsプロジェクトの一部としてダウンロードできます。
+
+* https://github.com/rails/rails/tree/master/activesupport
+
+
+==ライセンス
+
+アクティブサポートはMITライセンスでリリースされています。
+
+* https://opensource.org/licenses/MIT
+
+
+==サポート
+
+APIドキュメントは次の場所にあります。
+
+* https://api.rubyonrails.org
+
+Ruby on Railsプロジェクトのバグレポートはこちらから提出できます。
+
+* https://github.com/rails/rails/issues
+
+機能のリクエストは、以下のrails-coreメーリングリストで議論する必要があります。
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core

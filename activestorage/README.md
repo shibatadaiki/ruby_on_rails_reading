@@ -1,3 +1,5 @@
+done 
+
 # Active Storage
 
 Active Storage makes it simple to upload and reference files in cloud services like [Amazon S3](https://aws.amazon.com/s3/), [Google Cloud Storage](https://cloud.google.com/storage/docs/), or [Microsoft Azure Storage](https://azure.microsoft.com/en-us/services/storage/), and attach those files to Active Records. Supports having one main service and mirrors in other services for redundancy. It also provides a disk service for testing or local deployments, but the focus is on cloud storage.
@@ -160,3 +162,122 @@ Bug reports for the Ruby on Rails project can be filed here:
 Feature requests should be discussed on the rails-core mailing list here:
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core
+
+＃アクティブストレージ
+
+Active Storageを使用すると、[Amazon S3]（https://aws.amazon.com/s3/）、[Google Cloud Storage]（https://cloud.google.com/storage）などのクラウドサービスでファイルを簡単にアップロードして参照できます/ docs /）、または[Microsoft Azureストレージ]（https://azure.microsoft.com/en-us/services/storage/）にアクセスし、それらのファイルをアクティブレコードに添付します。冗長性のために1つのメインサービスと他のサービスのミラーをサポートします。また、テストまたはローカル展開用のディスクサービスも提供しますが、焦点はクラウドストレージにあります。
+
+ファイルはサーバーからクラウドにアップロードすることも、クライアントからクラウドに直接アップロードすることもできます。
+
+さらに、画像ファイルは、品質、アスペクト比、サイズ、またはその他の[MiniMagick]（https://github.com/minimagick/minimagick）または[Vips]（https：//www.rubydoc）のオンデマンドバリアントを使用して変換できます。 .info / gems / ruby​​-vips / Vips / Image）サポートされている変換。
+
+アクティブストレージの詳細については、[アクティブストレージの概要]（https://edgeguides.rubyonrails.org/active_storage_overview.html）ガイドをご覧ください。
+
+##他のストレージソリューションと比較
+
+Railsの他のアタッチメントソリューションと比較したActive Storageの動作の主な違いは、組み込みの[Blob]（https://github.com/rails/rails/blob/master/activestorage/app/models/active_storage）を使用することです。 /blob.rb）および[Attachment]（https://github.com/rails/rails/blob/master/activestorage/app/models/active_storage/attachment.rb）モデル（Active Recordによってサポート）。つまり、既存のアプリケーションモデルを追加の列で変更してファイルに関連付ける必要はありません。 Active Storageは、 `Attachment`結合モデルを介して多態的な関連付けを使用し、実際の` Blob`に接続します。
+
+`Blob`モデルは、添付ファイルのメタデータ（ファイル名、コンテンツタイプなど）とそれらの識別子キーをストレージサービスに格納します。 Blobモデルは実際のバイナリデータを格納しません。彼らは精神的に不変であることを意図しています。 1つのファイル、1つのblob。同じblobを複数のアプリケーションモデルに関連付けることもできます。そして、与えられた `Blob`の変換を行いたい場合、アイデアは既存のものを変更しようとするのではなく、単に新しいものを作成することです（もちろん、前のバージョンを後で削除することもできますが）それが必要です）。
+
+##インストール
+
+`bin / rails active_storage：install`を実行して、active_storageのマイグレーションをコピーします。
+
+注：タスクが見つからない場合は、 `require" active_storage / engine "`が `config / application.rb`に存在することを確認してください。
+
+##例
+
+1つの添付ファイル：
+
+「ルビー
+クラスUser <ApplicationRecord
+  ＃添付ファイルとブロブを関連付けます。ユーザーが破棄されると、
+  ＃デフォルトでパージされます（モデルが破棄され、リソースファイルが削除されます）。
+  has_one_attached：avatar
+終わり
+
+＃ユーザーにアバターをアタッチします。
+user.avatar.attach（io：File.open（ "/ path / to / face.jpg"）、filename： "face.jpg"、content_type： "image / jpg"）
+
+＃ユーザーはアバターを持っていますか？
+user.avatar.attached？ ＃=> true
+
+＃アバターと実際のリソースファイルを同期的に破棄します。
+user.avatar.purge
+
+＃アクティブジョブを介して、関連付けられているモデルと実際のリソースファイルを非同期で破棄します。
+user.avatar.purge_later
+
+＃ユーザーはアバターを持っていますか？
+user.avatar.attached？ ＃=> false
+
+＃アプリケーションを指すblobの永続的なURLを生成します。
+＃アクセスすると、実際のサービスエンドポイントへのリダイレクトが返されます。
+＃この間接参照は、パブリックURLを実際のURLから分離します。
+＃たとえば、さまざまなサービスで添付ファイルをミラーリングできます
+＃高可用性。リダイレクトのHTTP有効期限は5分です。
+url_for（user.avatar）
+
+クラスAvatarsController <ApplicationController
+  def update
+    ＃params [：avatar]にはActionDispatch :: Http :: UploadedFileオブジェクトが含まれています
+    Current.user.avatar.attach（params.require（：avatar））
+    redirect_to Current.user
+  終わり
+終わり
+「」
+
+多くの添付ファイル：
+
+「ルビー
+クラスMessage <ApplicationRecord
+  has_many_attached：images
+終わり
+「」
+
+`` `erb
+<％= form_withモデル：@メッセージ、ローカル：true do | form | ％>
+  <％= form.text_field：title、placeholder： "Title"％> <br>
+  <％= form.text_area：content％> <br> <br>
+
+  <％= form.file_field：images、multiple：true％> <br>
+  <％= form.submit％>
+<％終了％>
+「」
+
+「ルビー
+クラスMessagesController <ApplicationController
+  def index
+    ＃組み込みのwith_attached_imagesスコープを使用してN + 1を回避
+    @messages = Message.all.with_attached_images
+  終わり
+
+  def create
+    message = Message.create！ params.require（：message）.permit（：title、：content）
+    message.images.attach（params [：message] [：images]）
+    redirect_toメッセージ
+  終わり
+
+  デフショー
+    @message = Message.find（params [：id]）
+  終わり
+終わり
+「」
+
+画像添付ファイルのバリエーション：
+
+`` `erb
+<％＃バリアントURLを押すと、元のblobが遅延変換され、新しいサービスの場所にリダイレクトされます％>
+<％= image_tag user.avatar.variant（resize_to_limit：[100、100]）％>
+「」
+
+##直接アップロード
+
+JavaScriptライブラリーが組み込まれたActive Storageは、クライアントからクラウドへの直接アップロードをサポートしています。
+
+###直接アップロードのインストール
+
+1.アプリケーションのJavaScriptバンドルに「activestorage.js」を含めます。
+
+    アセットピップの使用
+

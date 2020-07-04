@@ -1,3 +1,5 @@
+done
+
 = Railties -- Gluing the Engine to the Rails
 
 Railties is responsible for gluing all frameworks together. Overall, it:
@@ -36,5 +38,46 @@ Bug reports can be filed for the Ruby on Rails project here:
 * https://github.com/rails/rails/issues
 
 Feature requests should be discussed on the rails-core mailing list here:
+
+* https://discuss.rubyonrails.org/c/rubyonrails-core
+
+= Railties-エンジンをRailsに接着する
+
+Railtiesは、すべてのフレームワークを一緒に接着する責任があります。 全体的に、それ：
+
+* Railsアプリケーションのブートストラッププロセスを処理します。
+
+* + rails +コマンドラインインターフェースを管理します。
+
+*およびRailsジェネレーターコアを提供します。
+
+
+==ダウンロード
+
+Railtiesの最新バージョンはRubyGemsでインストールできます。
+
+* gemインストールレール
+
+ソースコードは、GitHubのRailsプロジェクトの一部としてダウンロードできます。
+
+* https://github.com/rails/rails/tree/master/railties
+
+==ライセンス
+
+RailtiesはMITライセンスでリリースされています。
+
+* https://opensource.org/licenses/MIT
+
+==サポート
+
+APIドキュメントは
+
+* https://api.rubyonrails.org
+
+Ruby on Railsプロジェクトのバグレポートはこちらから提出できます。
+
+* https://github.com/rails/rails/issues
+
+機能のリクエストは、以下のrails-coreメーリングリストで議論する必要があります。
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core

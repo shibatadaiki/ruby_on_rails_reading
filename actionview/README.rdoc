@@ -1,3 +1,5 @@
+done
+
 = Action View
 
 Action View is a framework for handling view template lookup and rendering, and provides
@@ -36,5 +38,46 @@ Bug reports for the Ruby on Rails project can be filed here:
 * https://github.com/rails/rails/issues
 
 Feature requests should be discussed on the rails-core mailing list here:
+
+* https://discuss.rubyonrails.org/c/rubyonrails-core
+
+=アクションビュー
+
+アクションビューは、ビューテンプレートのルックアップとレンダリングを処理するためのフレームワークであり、
+HTMLフォームやAtomフィードなどの作成を支援するヘルパーを表示します。
+アクションビューが処理するテンプレート形式はERB（組み込みRuby、通常は
+HTML内の短いRubyスニペットをインライン化するために使用されます）、およびXMLビルダー。
+
+アクションビューの詳細については、{アクションビューの概要} [https://edgeguides.rubyonrails.org/action_view_overview.html]ガイドをご覧ください。
+
+==ダウンロードとインストール
+
+RubyGemsを使用すると、Action Viewの最新バージョンをインストールできます。
+
+  $ gem install actionview
+
+ソースコードは、GitHubのRailsプロジェクトの一部としてダウンロードできます。
+
+* https://github.com/rails/rails/tree/master/actionview
+
+
+==ライセンス
+
+Action ViewはMITライセンスでリリースされています。
+
+* https://opensource.org/licenses/MIT
+
+
+==サポート
+
+APIドキュメントは
+
+* https://api.rubyonrails.org
+
+Ruby on Railsプロジェクトのバグレポートはこちらから提出できます。
+
+* https://github.com/rails/rails/issues
+
+機能のリクエストは、以下のrails-coreメーリングリストで議論する必要があります。
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core

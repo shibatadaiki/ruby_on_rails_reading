@@ -1,3 +1,5 @@
+done
+
 = Action Mailer -- Easy email delivery and testing
 
 Action Mailer is a framework for designing email service layers. These layers
@@ -137,5 +139,147 @@ Bug reports for the Ruby on Rails project can be filed here:
 * https://github.com/rails/rails/issues
 
 Feature requests should be discussed on the rails-core mailing list here:
+
+* https://discuss.rubyonrails.org/c/rubyonrails-core
+
+=アクションメーラー-簡単なメール配信とテスト
+
+アクションメーラーは、メールサービスレイヤーを設計するためのフレームワークです。これらのレイヤー
+忘れたパスワードを送信するためのコードを統合するために使用されます。ようこそ
+サインアップの希望、請求の請求書、およびその他の必要なユースケース
+人または別のシステムへの書面による通知。
+
+Action Mailerは本質的にAction Controllerと
+メール宝石。同じでテンプレートを使用して電子メールを作成する方法を提供します
+Action Controllerがテンプレートを使用してビューをレンダリングする方法。
+
+さらに、アクションメーラークラスを使用して受信メールを処理できます。
+たとえば、ブログがメールからの新しい投稿を受け入れることを許可するなど
+電話から送信されました）。
+
+アクションメーラーの詳細については、{アクションメーラーの基本} [https://edgeguides.rubyonrails.org/action_mailer_basics.html]ガイドをご覧ください。
+
+==メールを送信する
+
+フレームワークは、必要なインスタンス変数を初期化することで機能します
+メールテンプレートで利用可能で、その後+ mail +を呼び出して配信する
+Eメール。
+
+これは次のように簡単です。
+
+  クラスNotifier <ActionMailer :: Base
+    デフォルト： 'system@loudthinking.com'
+
+    def welcome（recipient）
+      @recipient =受信者
+      mail（to：受信者、
+           件名： "[登録済み]ようこそ＃{recipient}"）
+    終わり
+  終わり
+
+電子メールの本文は、アクションビューテンプレート（通常の
+ERB）には、メイラーアクションで宣言されているインスタンス変数があります。
+
+したがって、上記のメソッドに対応する本文テンプレートは次のようになります。
+
+  こんにちは、
+
+  <％= @recipient％>様
+
+  サインアップしていただきありがとうございます！
+
+受信者が「david@loudthinking.com」として与えられた場合、メール
+生成されたこのようになります：
+
+  日付：2010年1月25日月曜日22:48:09 +1100
+  差出人：system@loudthinking.com
+  宛先：david@loudthinking.com
+  メッセージID：<4b5d84f9dd6a5_7380800b81ac29578@void.loudthinking.com.mail>
+  件名：[登録済み]ようこそdavid@loudthinking.com
+  MIMEバージョン：1.0
+  Content-Type：text / plain;
+  charset = "US-ASCII";
+  コンテンツ転送エンコード：7ビット
+
+  こんにちは、
+
+  david@loudthinking.com氏
+
+  サインアップしていただきありがとうございます！
+
+メールを送信するには、メソッドを呼び出し、戻り値に対して+ deliver_now +を呼び出すだけです。
+
+メソッドを呼び出すと、メールメッセージオブジェクトが返されます。
+
+  message = Notifier.welcome（ "david@loudthinking.com"）＃=> Mail :: Messageオブジェクトを返します
+  message.deliver_now＃=>メールを配信します
+
+または、次のようにメソッドをチェーンすることもできます。
+
+  Notifier.welcome（ "david@loudthinking.com"）。deliver_now＃メールを作成してすぐに送信する
+
+==デフォルトの設定
+
+のすべてのメソッドで使用されるデフォルト値を設定することが可能です
+アクションメーラークラス。この機能を実装するには、パブリックを呼び出すだけです
+<tt> ActionMailer :: Base </ tt>から無料で取得できるクラスメソッド+ default +。
+このメソッドは、パラメーターとしてハッシュを受け入れます。任意のヘッダーを使用できますが、
+電子メールメッセージには、キーとして+：from +などがあります。次のように文字列を渡すこともできます
+「Content-Type」のようなキーですが、アクションメーラーは、箱から出してこれを行います。
+だから心配する必要はありません。最後に、
+必要なときに評価されるプロシージャ。
+
+このメソッドで設定したすべての値は、
+メーラーメソッドで同じキー。
+
+例：
+
+  クラスAuthenticationMailer <ActionMailer :: Base
+    デフォルト： "awesome@application.com"、件名：Proc.new {"メールは＃{Time.now}で生成されました"}
+    .....
+  終わり
+
+==設定
+
+基本クラスには、構成オプションの完全なリストがあります。次に例を示します。
+
+  ActionMailer :: Base.smtp_settings = {
+    アドレス： 'smtp.yourserver.com'、＃デフォルト：localhost
+    ポート： '25'、＃デフォルト：25
+    user_name： 'ユーザー'、
+    パスワード： 'pass'、
+    authentication：：plain＃：plain、：login or：cram_md5
+  }
+
+
+==ダウンロードとインストール
+
+RubyGemsを使用すると、アクションメーラーの最新バージョンをインストールできます。
+
+  $ gem install actionmailer
+
+ソースコードは、GitHubのRailsプロジェクトの一部としてダウンロードできます。
+
+* https://github.com/rails/rails/tree/master/actionmailer
+
+
+==ライセンス
+
+アクションメーラーはMITライセンスでリリースされています。
+
+* https://opensource.org/licenses/MIT
+
+
+==サポート
+
+APIドキュメントは
+
+* https://api.rubyonrails.org
+
+Ruby on Railsプロジェクトのバグレポートはこちらから提出できます。
+
+* https://github.com/rails/rails/issues
+
+機能のリクエストは、以下のrails-coreメーリングリストで議論する必要があります。
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core

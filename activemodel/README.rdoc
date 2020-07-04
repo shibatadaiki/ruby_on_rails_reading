@@ -269,3 +269,195 @@ Bug reports for the Ruby on Rails project can be filed here:
 Feature requests should be discussed on the rails-core mailing list here:
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core
+
+=アクティブモデル-Railsのモデルインターフェイス
+
+アクティブモデルは、モデルクラスで使用するための既知のインターフェイスのセットを提供します。
+アクションパックヘルパーが非アクティブレコードモデルとやり取りできるようにします。
+例えば。アクティブモデルは、外部で使用するカスタムORMの構築にも役立ちます
+Railsフレームワーク。
+
+アクティブモデルの詳細については、{アクティブモデルの基本} [https://edgeguides.rubyonrails.org/active_model_basics.html]ガイドをご覧ください。
+
+Rails 3.0以前では、プラグインまたはGem開発者がオブジェクトを必要としていた場合
+アクションパックヘルパーとやり取りする場合、いずれかのチャンクをコピーする必要がありました。
+Railsのコード、またはサルがオブジェクト全体を処理するようにヘルパー全体にパッチを適用します
+これは、Active Recordインターフェースに正確に準拠していませんでした。これは
+コードの複製と、アップグレードで壊れた壊れやすいアプリケーションで。アクティブ
+モデルは、明示的なAPIを定義することでこれを解決します。あなたはについての詳細を読むことができます
+<tt> ActiveModel :: Lint :: Tests </ tt>のAPI。
+
+アクティブモデルは、必要な基本APIを実装するデフォルトモジュールを提供します
+箱から出してすぐにアクションパックと統合するには：<tt> ActiveModel :: Model </ tt>。
+
+    クラスPerson
+      ActiveModel :: Modelを含める
+
+      attr_accessor：name、：age
+      validates_presence_of：name
+    終わり
+
+    person = Person.new（name： 'bob'、age： '18'）
+    person.name＃=> 'bob'
+    person.age＃=> '18'
+    person.valid？ ＃=> true
+
+モデル名の内省、変換、翻訳、
+検証、アクションパックでの使用に適したクラスになります。
+その他の例については、<tt> ActiveModel :: Model </ tt>を参照してください。
+
+アクティブモデルは、ORMのような
+すぐに使える動作：
+
+*オブジェクトに属性マジックを追加
+
+    クラスPerson
+      ActiveModel :: AttributeMethodsを含める
+
+      attribute_method_prefix 'clear_'
+      define_attribute_methods：name、：age
+
+      attr_accessor：name、：age
+
+      def clear_attribute（attr）
+        send（ "＃{attr} ="、nil）
+      終わり
+    終わり
+
+    person = Person.new
+    person.clear_name
+    person.clear_age
+
+  {詳細} [link：classes / ActiveModel / AttributeMethods.html]
+
+*特定の操作のコールバック
+
+    クラスPerson
+      ActiveModel :: Callbacksを拡張する
+      define_model_callbacks：create
+
+      def create
+        run_callbacks：create do
+          ＃ここに作成アクションメソッド
+        終わり
+      終わり
+    終わり
+
+  これにより、+ before_create +、+ around_create +、+ after_create +が生成されます
+  createメソッドをラップするクラスメソッド。
+
+  {詳細} [link：classes / ActiveModel / Callbacks.html]
+
+*値の変化の追跡
+
+    クラスPerson
+      ActiveModel :: Dirtyを含める
+
+      define_attribute_methods：name
+
+      デフ名
+        @名前
+      終わり
+
+      def name =（val）
+        name_will_change！ val == @nameでない限り
+        @name = val
+      終わり
+
+      def save
+        ＃永続化作業を行う
+        changes_applied
+      終わり
+    終わり
+
+    person = Person.new
+    person.name＃=> nil
+    person.changed？ ＃=> false
+    person.name = 'bob'
+    person.changed？ ＃=> true
+    person.changed＃=> ['名前']
+    person.changes＃=> {'name' => [nil、 'bob']}
+    person.save
+    person.name = 'robert'
+    person.save
+    person.previous_changes＃=> {'name' => ['bob、' robert ']}
+
+  {詳細} [link：classes / ActiveModel / Dirty.html]
+
+* + errors +インターフェイスをオブジェクトに追加する
+
+  エラーメッセージを公開すると、オブジェクトがアクションパックと対話できるようになります
+  ヘルパーをシームレスに。
+
+    クラスPerson
+
+      def initialize
+        @errors = ActiveModel :: Errors.new（self）
+      終わり
+
+      attr_accessor：name
+      attr_reader：errors
+
+      def validate！
+        errors.add（：name、 "nilにはできません"）if name.nil？
+      終わり
+
+      def self.human_attribute_name（attr、options = {}）
+        "名前"
+      終わり
+    終わり
+
+    person = Person.new
+    person.name = nil
+    person.validate！
+    person.errors.full_messages
+    ＃=> ["名前をnilにすることはできません"]
+
+  {詳細} [link：classes / ActiveModel / Errors.html]
+
+*モデル名の内省
+
+    クラスNamedPerson
+      ActiveModel :: Namingを拡張する
+    終わり
+
+    NamedPerson.model_name.name＃=> "NamedPerson"
+    NamedPerson.model_name.human＃=>「名前付き人物」
+
+  {詳細} [link：classes / ActiveModel / Naming.html]
+
+*オブジェクトをシリアライズ可能にする
+
+  <tt> ActiveModel :: Serialization </ tt>は、オブジェクトの標準インターフェースを提供します
+  + to_json +シリアル化を提供します。
+
+    クラスSerialPerson
+      ActiveModel :: Serializationを含める
+
+      attr_accessor：name
+
+      def属性
+        {'名前' =>名前}
+      終わり
+    終わり
+
+    s = SerialPerson.new
+    s.serializable_hash＃=> {"name" => nil}
+
+    クラスSerialPerson
+      ActiveModel :: Serializers :: JSONを含める
+    終わり
+
+    s = SerialPerson.new
+    s.to_json＃=> "{\" name \ "：null}"
+
+  {詳細} [link：classes / ActiveModel / Serialization.html]
+
+*国際化（i18n）サポート
+
+    クラスPerson
+      ActiveModel :: Translationを拡張する
+    終わり
+
+    Person.human_attribute_name（ 'my_attribute'）
+    ＃=

@@ -1,3 +1,5 @@
+done
+
 = Active Record -- Object-relational mapping in Rails
 
 Active Record connects classes to relational database tables to establish an
@@ -215,5 +217,225 @@ Bug reports for the Ruby on Rails project can be filed here:
 * https://github.com/rails/rails/issues
 
 Feature requests should be discussed on the rails-core mailing list here:
+
+* https://discuss.rubyonrails.org/c/rubyonrails-core
+
+= Active Record-Railsのオブジェクトリレーショナルマッピング
+
+Active Recordは、クラスをリレーショナルデータベーステーブルに接続して、
+アプリケーションの構成がほぼゼロの永続化レイヤー。図書館
+サブクラス化されると、新しいクラス間のマッピングを設定する基本クラスを提供します
+クラスとデータベース内の既存のテーブル。アプリケーションのコンテキストでは、
+これらのクラスは一般に*モデル*と呼ばれます。モデルもすることができます
+他のモデルに接続されています。これは* associations *を定義することで行われます。
+
+アクティブレコードは、クラスと関連付けを使用するという点でネーミングに大きく依存しています
+それぞれのデータベーステーブルと外部キー間のマッピングを確立するための名前
+列。これらのマッピングは明示的に定義できますが、推奨されます
+命名規則に従う必要があります。特に、
+図書館。
+
+アクティブレコードについて詳しくは、{アクティブレコードの基本} [https://edgeguides.rubyonrails.org/active_record_basics.html]ガイドをご覧ください。
+
+主な機能のいくつかの短い要約：
+
+*クラスとテーブル、属性、列の間の自動マッピング。
+
+   クラスProduct <ActiveRecord :: Base
+   終わり
+
+  {詳細} [link：classes / ActiveRecord / Base.html]
+
+Productクラスは、「products」という名前のテーブルに自動的にマッピングされます。
+これは次のようになります。
+
+   CREATE TABLE製品（
+     id bigint NOT NULL auto_increment、
+     名前varchar（255）、
+     プライマリキー（ID）
+   ）;
+
+これにより、次のアクセサーも定義されます：<tt> Product＃name </ tt>および
+<tt> Product＃name =（new_name）</ tt>。
+
+
+*単純なクラスメソッドによって定義されたオブジェクト間の関連付け。
+
+   クラス会社<ActiveRecord :: Base
+     has_many：clients
+     has_one：account
+     belongs_to：conglomerate
+   終わり
+
+  {詳細} [link：classes / ActiveRecord / Associations / ClassMethods.html]
+
+
+*値オブジェクトの集計。
+
+   クラスAccount <ActiveRecord :: Base
+     composite_of：balance、class_name： 'お金'、
+                 マッピング：％w（バランス量）
+     composite_of：address、
+                 マッピング：[％w（address_street street）、％w（address_city city）]
+   終わり
+
+  {詳細} [link：classes / ActiveRecord / Aggregations / ClassMethods.html]
+
+
+*新しいオブジェクトと既存のオブジェクトで異なる検証ルール。
+
+    クラスAccount <ActiveRecord :: Base
+      ：subdomain、：name、：email_address、：password、presence：trueを検証します
+      検証：サブドメイン、一意性：true
+      検証：terms_of_service、受け入れ：true、on :: create
+      ：password、：email_address、confirmation：true、on：：createを検証します
+    終わり
+
+  {詳細} [link：classes / ActiveRecord / Validations.html]
+
+
+*ライフサイクル全体で利用できるコールバック（インスタンス化、保存、破棄、検証など）。
+
+   クラスPerson <ActiveRecord :: Base
+     before_destroy：invalidate_payment_plan
+     ＃ `invalidate_payment_plan`メソッドはPerson＃destroyの直前に呼び出されます
+   終わり
+
+  {詳細} [link：classes / ActiveRecord / Callbacks.html]
+
+
+*継承階層。
+
+   クラスCompany <ActiveRecord :: Base;終わり
+   クラス会社<会社;終わり
+   クラスClient <Company;終わり
+   クラスPriorityClient <クライアント;終わり
+
+  {詳細} [link：classes / ActiveRecord / Base.html]
+
+
+*トランザクション。
+
+    ＃データベーストランザクション
+    Account.transaction do
+      david.withdrawal（100）
+      mary.deposit（100）
+    終わり
+
+  {詳細} [link：classes / ActiveRecord / Transactions / ClassMethods.html]
+
+
+*列、関連付け、および集計に関する考察。
+
+    リフレクション= Firm.reflect_on_association（：clients）
+    Reflection.klass＃=>クライアント（クラス）
+    Firm.columns＃企業テーブルの列記述子の配列を返します
+
+  {詳細} [link：classes / ActiveRecord / Reflection / ClassMethods.html]
+
+
+*シンプルなアダプターによるデータベースの抽象化。
+
+    ＃SQLite3に接続
+    ActiveRecord :: Base.establish_connection（アダプター： 'sqlite3'、データベース： 'dbfile.sqlite3'）
+
+    ＃認証でMySQLに接続する
+    ActiveRecord :: Base.establish_connection（
+      アダプター： 'mysql2'、
+      ホスト： 'localhost'、
+      ユーザー名： '私'、
+      パスワード： 'secret'、
+      データベース： 'activerecord'
+    ）
+
+  {詳細} [link：classes / ActiveRecord / Base.html]および組み込みのサポートについて読む
+  MySQL [link：classes / ActiveRecord / ConnectionAdapters / Mysql2Adapter.html]、
+  PostgreSQL [link：classes / ActiveRecord / ConnectionAdapters / PostgreSQLAdapter.html]、および
+  SQLite3 [link：classes / ActiveRecord / ConnectionAdapters / SQLite3Adapter.html]。
+
+
+* Log4r [https://github.com/colbygk/log4r]およびLogger [https://ruby-doc.org/stdlib/libdoc/logger/rdoc/]のロギングサポート。
+
+    ActiveRecord :: Base.logger = ActiveSupport :: Logger.new（STDOUT）
+    ActiveRecord :: Base.logger = Log4r :: Logger.new（ 'Application Log'）
+
+
+* Migrationsによるデータベースにとらわれないスキーマ管理。
+
+    クラスAddSystemSettings <ActiveRecord :: Migration [6.0]
+      防御する
+        create_table：system_settings do | t |
+          t.string：name
+          t.string：label
+          t.text：value
+          t.string：type
+          t.integer：position
+        終わり
+
+        SystemSetting.create名前： '通知'、ラベル： 'Use  notice？ '、値：1
+           終わり
+
+           デフダウン
+             drop_table：system_settings
+           終わり
+         終わり
+
+       {詳細} [link：classes / ActiveRecord / Migration.html]
+
+
+==哲学
+
+アクティブレコードは、オブジェクトリレーショナルマッピング（ORM）の実装です。
+同じパターン[https://www.martinfowler.com/eaaCatalog/activeRecord.html]
+マーティンファウラーが説明した名前：
+
+ 「データベースのテーブルまたはビューの行をラップするオブジェクト、
+ データベースアクセスをカプセル化し、そのデータにドメインロジックを追加します。」
+
+Active Recordは、不便さの解決策として一貫したラッパーを提供しようとします
+オブジェクトリレーショナルマッピング。このマッピングの主要な指示は、
+実際のドメインモデルを構築するために必要なコードの量。これが可能になります
+Active Recordが推論することを容易にする多くの規則に依存することによって
+最小限の量の明示的な方向からの複雑な関係と構造。
+
+構成に関する規約：
+* XMLファイルはありません！
+*多くのリフレクションとランタイム拡張
+*魔法は本質的に悪い言葉ではありません
+
+データベースを認める：
+*奇妙なケースとパフォーマンスのためにSQLにドロップダウンできます
+*データ定義を複製または置換しようとしない
+
+
+==ダウンロードとインストール
+
+最新バージョンのActive RecordはRubyGemsでインストールできます。
+
+ $ gem install activerecord
+
+ソースコードは、GitHubのRailsプロジェクトの一部としてダウンロードできます。
+
+* https://github.com/rails/rails/tree/master/activerecord
+
+
+==ライセンス
+
+Active RecordはMITライセンスでリリースされています：
+
+* https://opensource.org/licenses/MIT
+
+
+==サポート
+
+APIドキュメントは次の場所にあります。
+
+* https://api.rubyonrails.org
+
+Ruby on Railsプロジェクトのバグレポートはこちらから提出できます。
+
+* https://github.com/rails/rails/issues
+
+機能のリクエストは、以下のrails-coreメーリングリストで議論する必要があります。
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core

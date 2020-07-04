@@ -1,3 +1,5 @@
+done
+
 # Action Cable – Integrated WebSockets for Rails
 
 Action Cable seamlessly integrates WebSockets with the rest of your Rails application.
@@ -22,3 +24,26 @@ Bug reports for the Ruby on Rails project can be filed here:
 Feature requests should be discussed on the rails-core mailing list here:
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core
+
+＃アクションケーブル–レール用統合WebSocket
+
+Action Cableは、WebSocketを残りのRailsアプリケーションとシームレスに統合します。
+リアルタイム機能を同じスタイルでRubyで記述することができます
+パフォーマンスを維持しながら、Railsアプリケーションの残りの部分として形成されます
+そしてスケーラブル。 これは、クライアント側の両方を提供するフルスタック製品です
+JavaScriptフレームワークとサーバー側Rubyフレームワーク。 フルにアクセスできます
+Active Recordまたは選択したORMで記述されたドメインモデル。
+
+アクションケーブルの詳細については、[アクションケーブルの概要]（https://edgeguides.rubyonrails.org/action_cable_overview.html）ガイドをご覧ください。
+
+＃＃ サポート
+
+APIドキュメントは次の場所にあります。
+
+* https://api.rubyonrails.org
+
+Ruby on Railsプロジェクトのバグレポートはこちらから提出できます。
+
+* https://github.com/rails/rails/issues
+
+機能のリクエストは、以下のrails-coreメーリングリストで議論する必要があります。

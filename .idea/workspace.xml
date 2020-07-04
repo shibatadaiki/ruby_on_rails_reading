@@ -3,9 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="eef7a46e-f152-42de-8fd6-047dfed8c8fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/attribute_assignment.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/attribute_assignment.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/type/value.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/type/value.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actioncable/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/actioncable/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmailbox/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/actionmailbox/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionmailer/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/actionmailer/README.rdoc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionpack/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/actionpack/README.rdoc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actiontext/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/actiontext/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/actionview/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/actionview/README.rdoc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activejob/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/activejob/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/README.rdoc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activerecord/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/activerecord/README.rdoc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activestorage/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/activestorage/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activesupport/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/activesupport/README.rdoc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/count.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/railties/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/railties/README.rdoc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks/release_announcement_draft.erb" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/release_announcement_draft.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/tools/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +39,20 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/activesupport/test" />
+      <recent name="$PROJECT_DIR$/activesupport" />
+      <recent name="$PROJECT_DIR$/guides/assets" />
+      <recent name="$PROJECT_DIR$/tools" />
+      <recent name="$PROJECT_DIR$/railties/test" />
+    </key>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -66,6 +90,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2342" y="249" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593867467893">
+      <screen x="1680" y="-91" width="1920" height="1080" />
+    </state>
+    <state x="2342" y="249" key="#com.intellij.fileTypes.FileTypeChooser/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593867467893" />
     <state x="2149" y="88" key="SettingsEditor" timestamp="1593364115146">
       <screen x="1680" y="-91" width="1920" height="1080" />
     </state>
@@ -76,6 +104,10 @@
     </state>
     <state x="2643" y="235" width="762" height="518" key="find.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593643845151" />
     <state x="2643" y="235" width="762" height="518" key="find.popup/1680.-91.1920.1080/0.23.1680.1027@1680.-91.1920.1080" timestamp="1593647375324" />
+    <state x="2305" y="210" key="run.anything.popup" timestamp="1593704892330">
+      <screen x="1680" y="-91" width="1920" height="1080" />
+    </state>
+    <state x="2305" y="210" key="run.anything.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593704892330" />
     <state x="2305" y="150" width="670" height="676" key="search.everywhere.popup" timestamp="1593644691690">
       <screen x="1680" y="-91" width="1920" height="1080" />
     </state>
