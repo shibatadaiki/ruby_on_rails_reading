@@ -55,40 +55,52 @@ module ActiveModel
 
       # Attribute.type_cast(value_before_type_cast) => TypeObject.cast_value(value_before_type_cast)
       # 各TypeのObjectのcastメソッドを、引数をvalue_before_type_castで起動して、Attributeの@valueを生成する
+
+      # Rubyで変数が定義されているか確認するにはdefined?を使用する。 defined?は変数が定義されていなければnilを返す。
       @value = type_cast(value_before_type_cast) unless defined?(@value)
       @value
     end
 
     def original_value
       if assigned?
+        # @original_attributeが定義されていれば再帰的に一番最初のoriginalを辿りに行く
         original_attribute.original_value
       else
+        # 一番最初のvalueをcastする
         type_cast(value_before_type_cast)
       end
     end
 
+    # database（そのままの）値
     def value_for_database
+      # 設定されたtypeClassのserializeをvalueにかける
       type.serialize(value)
     end
 
+    # 値の型などに変更が起きたかどうかの確認
     def changed?
       changed_from_assignment? || changed_in_place?
     end
 
     def changed_in_place?
+      # 変数が定義されていて、かつ、typeオブジェのchanged_in_place?でtrueが返るかの判定
       has_been_read? && type.changed_in_place?(original_value_for_database, value)
     end
 
+    # 割り当て値のリセット化？
     def forgetting_assignment
       with_value_from_database(value_for_database)
     end
 
-    # 各種インスタンス生成（nullとuninitializedはまた別）
+    # 引数の値で各種インスタンスを再生成（nullとuninitializedはまた別）
     def with_value_from_user(value)
+      # selializeとかするときに何か処理をかけるっぽい
       type.assert_valid_value(value)
+      # original_attributeに、変更される前の自分自身（の属性）を持っておく
       self.class.from_user(name, value, type, original_attribute || self)
     end
 
+    # 引数の値で各種インスタンスを再生成（nullとuninitializedはまた別）
     def with_value_from_database(value)
       self.class.from_database(name, value, type)
     end
@@ -169,7 +181,9 @@ module ActiveModel
         end
       end
 
+      # 割り当てから変更されましたか？
       def changed_from_assignment?
+        # valueが存在し、かつ、typeオブジェのchanged?でtrueが返るかの判定
         assigned? && type.changed?(original_value, value, value_before_type_cast)
       end
 

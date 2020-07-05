@@ -3,21 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="eef7a46e-f152-42de-8fd6-047dfed8c8fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actioncable/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/actioncable/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionmailbox/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/actionmailbox/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionmailer/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/actionmailer/README.rdoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionpack/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/actionpack/README.rdoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actiontext/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/actiontext/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/actionview/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/actionview/README.rdoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activejob/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/activejob/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/README.rdoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activerecord/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/activerecord/README.rdoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activestorage/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/activestorage/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activesupport/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/activesupport/README.rdoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/count.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/railties/README.rdoc" beforeDir="false" afterPath="$PROJECT_DIR$/railties/README.rdoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/release_announcement_draft.erb" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/release_announcement_draft.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/tools/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/attribute.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/attribute.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/model.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/model.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/railtie.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/railtie.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/translation.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/translation.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,15 +88,15 @@
     </state>
     <state x="2149" y="88" key="SettingsEditor/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593364063723" />
     <state x="2149" y="88" key="SettingsEditor/1680.-91.1920.1080/0.23.1680.1027@1680.-91.1920.1080" timestamp="1593364115146" />
-    <state x="2643" y="235" width="762" height="518" key="find.popup" timestamp="1593647375324">
+    <state x="2643" y="235" width="762" height="518" key="find.popup" timestamp="1593925489528">
       <screen x="1680" y="-91" width="1920" height="1080" />
     </state>
-    <state x="2643" y="235" width="762" height="518" key="find.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593643845151" />
+    <state x="2643" y="235" width="762" height="518" key="find.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593925489528" />
     <state x="2643" y="235" width="762" height="518" key="find.popup/1680.-91.1920.1080/0.23.1680.1027@1680.-91.1920.1080" timestamp="1593647375324" />
-    <state x="2305" y="210" key="run.anything.popup" timestamp="1593704892330">
+    <state x="2305" y="210" key="run.anything.popup" timestamp="1593922992044">
       <screen x="1680" y="-91" width="1920" height="1080" />
     </state>
-    <state x="2305" y="210" key="run.anything.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593704892330" />
+    <state x="2305" y="210" key="run.anything.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593922992044" />
     <state x="2305" y="150" width="670" height="676" key="search.everywhere.popup" timestamp="1593644691690">
       <screen x="1680" y="-91" width="1920" height="1080" />
     </state>
