@@ -4,7 +4,7 @@
 
 module ActiveModel
   # Raised when forbidden attributes are used for mass assignment.
-  # 禁止属性が一括割り当てに使用されている場合に発生します。
+  # 禁止属性が一括割り当てに使用されている場合に発生します。（マスアサインメント対策）
 
   #
   #   class Person < ActiveRecord::Base

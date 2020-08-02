@@ -18,7 +18,7 @@ module ActiveModel
       ActiveModel::SecurePassword.min_cost = Rails.env.test?
     end
 
-    # エラ〜メッセージの設定？
+    # エラーメッセージの設定？
     initializer "active_model.i18n_customize_full_message" do
       ActiveModel::Error.i18n_customize_full_message = config.active_model.delete(:i18n_customize_full_message) || false
     end
