@@ -20,6 +20,8 @@ module ActiveModel
     #
     # ＃+ before_validation +がスローした場合、他の<tt> before _ * </ tt>コールバックと同様
     # +:abort+ then <tt>valid?</tt> will not be called.
+    #
+    # 他の場所で使われる（importされる）モジュール
     module Callbacks
       extend ActiveSupport::Concern
 

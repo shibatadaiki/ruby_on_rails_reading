@@ -6,6 +6,7 @@ require "active_support/core_ext/range"
 
 module ActiveModel
   module Validations
+    # 他の場所で使われる（importされる）モジュール
     module Clusivity #:nodoc:
       # validateに含まれる範囲系の処理。rangeで値の範囲の判定をする？
 

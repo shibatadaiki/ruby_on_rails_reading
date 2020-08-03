@@ -12,6 +12,8 @@ module ActiveModel
       end
 
       def validate_each(record, attribute, value)
+        # ["1", true]がvalueになければrecord.errors.add
+        # !Array(options[:accept]).include?(value) の処理で判定
         unless acceptable_option?(value)
           record.errors.add(attribute, :accepted, **options.except(:accept, :allow_nil))
         end

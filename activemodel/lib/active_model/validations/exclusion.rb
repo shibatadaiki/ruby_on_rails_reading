@@ -12,6 +12,7 @@ module ActiveModel
       include Clusivity
 
       def validate_each(record, attribute, value)
+        # 含まれていればrecord.errors
         if include?(record, value)
           record.errors.add(attribute, :exclusion, **options.except(:in, :within).merge!(value: value))
         end

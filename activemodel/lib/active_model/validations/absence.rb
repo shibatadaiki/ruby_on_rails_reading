@@ -1,3 +1,5 @@
+
+
 # frozen_string_literal: true
 
 module ActiveModel
@@ -6,7 +8,8 @@ module ActiveModel
     # 具象：不在バリデーターの処理を追加
     class AbsenceValidator < EachValidator #:nodoc:
       def validate_each(record, attr_name, value)
-        # present検証を追加
+        # present検証を追加 -> 「if value.present?」であれば「record.errors」が発生、
+        # と言うのがRailsModelのバリデーションの仕組み
         record.errors.add(attr_name, :present, **options) if value.present?
       end
     end
