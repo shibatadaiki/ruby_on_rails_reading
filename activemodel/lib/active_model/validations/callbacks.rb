@@ -1,14 +1,15 @@
+# done
+
 # frozen_string_literal: true
 
 module ActiveModel
   module Validations
-    # == Active \Model \Validation \Callbacks
-    #
-    # Provides an interface for any class to have +before_validation+ and
-    # +after_validation+ callbacks.
-    #
-    # First, include ActiveModel::Validations::Callbacks from the class you are
-    # creating:
+    #＃==アクティブな\ Model \ Validation \ Callbacks
+    #＃
+    #＃すべてのクラスが+ before_validation +および
+    #＃+ after_validation +コールバック。
+    #＃
+    #＃最初に、現在のクラスのActiveModel :: Validations :: Callbacksを含めます    # creating:
     #
     #   class MyModel
     #     include ActiveModel::Validations::Callbacks
@@ -17,7 +18,7 @@ module ActiveModel
     #     after_validation  :do_stuff_after_validation
     #   end
     #
-    # Like other <tt>before_*</tt> callbacks if +before_validation+ throws
+    # ＃+ before_validation +がスローした場合、他の<tt> before _ * </ tt>コールバックと同様
     # +:abort+ then <tt>valid?</tt> will not be called.
     module Callbacks
       extend ActiveSupport::Concern
@@ -30,7 +31,7 @@ module ActiveModel
       end
 
       module ClassMethods
-        # Defines a callback that will get called right before validation.
+        # 検証の直前に呼び出されるコールバックを定義します。
         #
         #   class Person
         #     include ActiveModel::Validations
@@ -53,6 +54,8 @@ module ActiveModel
         #   person.name = '  bob  '
         #   person.valid? # => true
         #   person.name   # => "bob"
+        #
+        # モデルに定義されたバリデーションを実際の処理に起こしてコールバックに渡す
         def before_validation(*args, &block)
           options = args.extract_options!
 
@@ -68,7 +71,7 @@ module ActiveModel
           set_callback(:validation, :before, *args, options, &block)
         end
 
-        # Defines a callback that will get called right after validation.
+        # 検証直後に呼び出されるコールバックを定義します。
         #
         #   class Person
         #     include ActiveModel::Validations
@@ -94,6 +97,8 @@ module ActiveModel
         #   person.name = 'bob'
         #   person.valid? # => true
         #   person.status # => true
+        #
+        # モデルに定義されたバリデーションを実際の処理に起こしてコールバックに渡す
         def after_validation(*args, &block)
           options = args.extract_options!
           options = options.dup
@@ -112,7 +117,7 @@ module ActiveModel
       end
 
     private
-      # Overwrite run validations to include callbacks.
+      # 実行検証を上書きしてコールバックを含めます。
       def run_validations!
         _run_validation_callbacks { super }
       end

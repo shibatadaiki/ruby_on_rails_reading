@@ -1,7 +1,10 @@
+# done
+
 # frozen_string_literal: true
 
 module ActiveModel
   module Validations
+    #＃パスワードまたは電子メールを検証するパターンをカプセル化
     class ConfirmationValidator < EachValidator # :nodoc:
       def initialize(options)
         super({ case_sensitive: true }.merge!(options))
@@ -19,6 +22,7 @@ module ActiveModel
 
       private
         def setup!(klass)
+          # 検証属性を動的に定義する
           klass.attr_reader(*attributes.map do |attribute|
             :"#{attribute}_confirmation" unless klass.method_defined?(:"#{attribute}_confirmation")
           end.compact)
@@ -30,6 +34,10 @@ module ActiveModel
 
         def confirmation_value_equal?(record, attribute, value, confirmed)
           if !options[:case_sensitive] && value.is_a?(String)
+            # https://docs.ruby-lang.org/ja/latest/method/String/i/casecmp.html
+            # 文字列の順序を比較しますが、アルファベットの大文字小文字の違いを無視します。
+            #
+            # 値が一致しているか確認
             value.casecmp(confirmed) == 0
           else
             value == confirmed
@@ -38,8 +46,8 @@ module ActiveModel
     end
 
     module HelperMethods
-      # Encapsulates the pattern of wanting to validate a password or email
-      # address field with a confirmation.
+      #＃パスワードまたは電子メールを検証するパターンをカプセル化します
+      #＃確認のある住所フィールド。      #
       #
       #   Model:
       #     class Person < ActiveRecord::Base
@@ -52,26 +60,26 @@ module ActiveModel
       #     <%= password_field "person", "password" %>
       #     <%= password_field "person", "password_confirmation" %>
       #
-      # The added +password_confirmation+ attribute is virtual; it exists only
-      # as an in-memory attribute for validating the password. To achieve this,
-      # the validation adds accessors to the model for the confirmation
-      # attribute.
-      #
-      # NOTE: This check is performed only if +password_confirmation+ is not
-      # +nil+. To require confirmation, make sure to add a presence check for
-      # the confirmation attribute:
-      #
-      #   validates_presence_of :password_confirmation, if: :password_changed?
-      #
-      # Configuration options:
-      # * <tt>:message</tt> - A custom error message (default is: "doesn't match
-      #   <tt>%{translated_attribute_name}</tt>").
-      # * <tt>:case_sensitive</tt> - Looks for an exact match. Ignored by
-      #   non-text columns (+true+ by default).
-      #
-      # There is also a list of default options supported by every validator:
-      # +:if+, +:unless+, +:on+, +:allow_nil+, +:allow_blank+, and +:strict+.
-      # See <tt>ActiveModel::Validations#validates</tt> for more information
+      # ＃追加された+ password_confirmation +属性は仮想です。存在するだけ
+      #      ＃パスワードを検証するためのメモリ内属性として。これを達成するために、
+      #      ＃検証は確認のためにモデルにアクセサーを追加します
+      #      ＃属性。
+      #      ＃
+      #      ＃注：このチェックは、+ password_confirmation +がない場合にのみ実行されます
+      #      ＃+ nil +。確認を要求するには、必ず存在チェックを追加してください
+      #      ＃確認属性：
+      #      ＃
+      #      ＃validates_presence_of：password_confirmation、if：：password_changed？
+      #      ＃
+      #      ＃設定オプション：
+      #      ＃* <tt>：message </ tt>-カスタムエラーメッセージ（デフォルトは「一致しない」
+      #      ＃<tt>％{translated_attribute_name} </ tt> "）。
+      #      ＃* <tt>：case_sensitive </ tt>-完全に一致するものを探します。無視される
+      #      ＃非テキスト列（デフォルトは+ true +）。
+      #      ＃
+      #      ＃すべてのバリデーターがサポートするデフォルトのオプションのリストもあります：
+      #      ＃+：if +、+：unless +、+：on +、+：allow_nil +、+：allow_blank +、+：strict +。
+      #      ＃詳細は、<tt> ActiveModel :: Validations＃validates </ tt>を参照してください
       def validates_confirmation_of(*attr_names)
         validates_with ConfirmationValidator, _merge_attributes(attr_names)
       end

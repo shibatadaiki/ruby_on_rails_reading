@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 require "active_model/validations/clusivity"
@@ -5,6 +7,8 @@ require "active_model/validations/clusivity"
 module ActiveModel
   module Validations
     class ExclusionValidator < EachValidator # :nodoc:
+
+      # validateに含まれる範囲系の処理。rangeで値の範囲の判定をするClusivityを含んで、in/withinのバリデーション処理を追加する
       include Clusivity
 
       def validate_each(record, attribute, value)
@@ -15,8 +19,8 @@ module ActiveModel
     end
 
     module HelperMethods
-      # Validates that the value of the specified attribute is not in a
-      # particular enumerable object.
+      #＃指定された属性の値が
+      #＃特定の列挙可能なオブジェクト。      #
       #
       #   class Person < ActiveRecord::Base
       #     validates_exclusion_of :username, in: %w( admin superuser ), message: "You don't belong here"
@@ -27,20 +31,20 @@ module ActiveModel
       #     validates_exclusion_of :karma, in: :reserved_karmas
       #   end
       #
-      # Configuration options:
-      # * <tt>:in</tt> - An enumerable object of items that the value shouldn't
-      #   be part of. This can be supplied as a proc, lambda or symbol which returns an
-      #   enumerable. If the enumerable is a numerical, time or datetime range the test
-      #   is performed with <tt>Range#cover?</tt>, otherwise with <tt>include?</tt>. When
-      #   using a proc or lambda the instance under validation is passed as an argument.
-      # * <tt>:within</tt> - A synonym(or alias) for <tt>:in</tt>
-      #   <tt>Range#cover?</tt>, otherwise with <tt>include?</tt>.
-      # * <tt>:message</tt> - Specifies a custom error message (default is: "is
-      #   reserved").
-      #
-      # There is also a list of default options supported by every validator:
-      # +:if+, +:unless+, +:on+, +:allow_nil+, +:allow_blank+, and +:strict+.
-      # See <tt>ActiveModel::Validations#validates</tt> for more information
+      #＃設定オプション：
+      #＃* <tt>：in </ tt>-値が許可されないアイテムの列挙可能なオブジェクト
+      # ＃   の一部。 これは、proc、lambda、またはシンボルとして提供され、
+      # ＃列挙可能。 列挙可能なものが数値、時間、または日時の範囲である場合、テスト
+      # ＃は<tt> Range＃cover？</ tt>で実行され、それ以外の場合は<tt> include？</ tt>で実行されます。 いつ
+      # ＃procまたはlambdaを使用して、検証中のインスタンスが引数として渡されます。
+      # ＃* <tt>：within </ tt>-<tt>：in </ tt>の同義語（またはエイリアス）
+      # ＃<tt> Range＃cover？</ tt>、それ以外の場合は<tt> include？</ tt>。
+      # ＃* <tt>：message </ tt>-カスタムエラーメッセージを指定します（デフォルトは「is
+      #＃予約済み」）。
+      #＃
+      #＃すべてのバリデーターがサポートするデフォルトのオプションのリストもあります：
+      #＃+：if +、+：unless +、+：on +、+：allow_nil +、+：allow_blank +、+：strict +。
+      #＃詳細は、<tt> ActiveModel :: Validations＃validates </ tt>を参照してください
       def validates_exclusion_of(*attr_names)
         validates_with ExclusionValidator, _merge_attributes(attr_names)
       end
