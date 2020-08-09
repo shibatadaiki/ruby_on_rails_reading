@@ -1,11 +1,16 @@
+# done
+
 # frozen_string_literal: true
 
 module ActiveModel
   module Validations
+    # 長さ検証
     class LengthValidator < EachValidator # :nodoc:
+      # バリデーションメソッドのメッセージと処理の定数
       MESSAGES  = { is: :wrong_length, minimum: :too_short, maximum: :too_long }.freeze
       CHECKS    = { is: :==, minimum: :>=, maximum: :<= }.freeze
 
+      # 予約済みオプション
       RESERVED_OPTIONS = [:minimum, :maximum, :within, :is, :too_short, :too_long]
 
       def initialize(options)
@@ -21,10 +26,12 @@ module ActiveModel
         super
       end
 
+      # バリデーションの指定記述がそもそも成り立っているかの確認処理
       def check_validity!
         keys = CHECKS.keys & options.keys
 
         if keys.empty?
+          # 範囲は指定されていません。 ：in、：within、：maximum、：minimum、または：isオプションを指定します。
           raise ArgumentError, "Range unspecified. Specify the :in, :within, :maximum, :minimum, or :is option."
         end
 
@@ -41,7 +48,9 @@ module ActiveModel
         value_length = value.respond_to?(:length) ? value.length : value.to_s.length
         errors_options = options.except(*RESERVED_OPTIONS)
 
+        # 指定されたバリデーション設定全てでvalueをチェックする
         CHECKS.each do |key, validity_check|
+          # チェックするかチェック
           next unless check_value = options[key]
 
           if !value.nil? || skip_nil_check?(key)
@@ -51,6 +60,7 @@ module ActiveModel
             when Symbol
               check_value = record.send(check_value)
             end
+            # value_length.send -> 3.>= check_value みたいになる
             next if value_length.send(validity_check, check_value)
           end
 
@@ -70,9 +80,9 @@ module ActiveModel
     end
 
     module HelperMethods
-      # Validates that the specified attributes match the length restrictions
-      # supplied. Only one constraint option can be used at a time apart from
-      # +:minimum+ and +:maximum+ that can be combined together:
+      # ＃指定された属性が長さ制限に一致することを検証します
+      #       ＃提供されます。 一度に使用できる制約オプションは1つだけです。
+      #       ＃+：minimum +および+：maximum +一緒に組み合わせることができます：
       #
       #   class Person < ActiveRecord::Base
       #     validates_length_of :first_name, maximum: 30
@@ -91,34 +101,35 @@ module ActiveModel
       #     end
       #   end
       #
-      # Constraint options:
       #
-      # * <tt>:minimum</tt> - The minimum size of the attribute.
-      # * <tt>:maximum</tt> - The maximum size of the attribute. Allows +nil+ by
-      #   default if not used with +:minimum+.
-      # * <tt>:is</tt> - The exact size of the attribute.
-      # * <tt>:within</tt> - A range specifying the minimum and maximum size of
-      #   the attribute.
-      # * <tt>:in</tt> - A synonym (or alias) for <tt>:within</tt>.
-      #
-      # Other options:
-      #
-      # * <tt>:allow_nil</tt> - Attribute may be +nil+; skip validation.
-      # * <tt>:allow_blank</tt> - Attribute may be blank; skip validation.
-      # * <tt>:too_long</tt> - The error message if the attribute goes over the
-      #   maximum (default is: "is too long (maximum is %{count} characters)").
-      # * <tt>:too_short</tt> - The error message if the attribute goes under the
-      #   minimum (default is: "is too short (minimum is %{count} characters)").
-      # * <tt>:wrong_length</tt> - The error message if using the <tt>:is</tt>
-      #   method and the attribute is the wrong size (default is: "is the wrong
-      #   length (should be %{count} characters)").
-      # * <tt>:message</tt> - The error message to use for a <tt>:minimum</tt>,
-      #   <tt>:maximum</tt>, or <tt>:is</tt> violation. An alias of the appropriate
-      #   <tt>too_long</tt>/<tt>too_short</tt>/<tt>wrong_length</tt> message.
-      #
-      # There is also a list of default options supported by every validator:
-      # +:if+, +:unless+, +:on+ and +:strict+.
-      # See <tt>ActiveModel::Validations#validates</tt> for more information
+      # ＃制約オプション：
+      #      ＃
+      #      ＃* <tt>：minimum </ tt>-属性の最小サイズ。
+      #      ＃* <tt>：maximum </ tt>-属性の最大サイズ。 + nil +を許可
+      #      ＃+：minimum +と併用しない場合のデフォルト。
+      #      ＃* <tt>：is </ tt>-属性の正確なサイズ。
+      #      ＃* <tt>：within </ tt>-の最小サイズと最大サイズを指定する範囲
+      #      ＃属性。
+      #      ＃* <tt>：in </ tt>-<tt>：within </ tt>の同義語（またはエイリアス）。
+      #      ＃
+      #      ＃ 別のオプション：
+      #      ＃
+      #      ＃* <tt>：allow_nil </ tt>-属性は+ nil +の場合があります。検証をスキップします。
+      #      ＃* <tt>：allow_blank </ tt>-属性は空白の場合があります。検証をスキップします。
+      #      ＃* <tt>：too_long </ tt>-属性が
+      #      ＃最大（デフォルトは「長すぎる（最大は％{count}文字）」）。
+      #      ＃* <tt>：too_short </ tt>-属性が下にある場合のエラーメッセージ
+      #      ＃最小（デフォルトは「短すぎる（最小は％{count}文字）」）。
+      #      ＃* <tt>：wrong_length </ tt>-<tt>：is </ tt>を使用している場合のエラーメッセージ
+      #      ＃メソッドと属性のサイズが間違っている（デフォルトは「間違っている」
+      #      ＃長さ（％{count}文字である必要があります） "）。
+      #      ＃* <tt>：message </ tt>-<tt>：minimum </ tt>に使用するエラーメッセージ、
+      #      ＃<tt>：maximum </ tt>、または<tt>：is </ tt>違反。適切なのエイリアス
+      #      ＃<tt> too_long </ tt> / <tt> too_short </ tt> / <tt> wrong_length </ tt>メッセージ。
+      #      ＃
+      #      ＃すべてのバリデーターがサポートするデフォルトのオプションのリストもあります：
+      #      ＃+：if +、+：unless +、+：on +および+：strict +。
+      #      ＃詳細は、<tt> ActiveModel :: Validations＃validates </ tt>を参照してください
       def validates_length_of(*attr_names)
         validates_with LengthValidator, _merge_attributes(attr_names)
       end

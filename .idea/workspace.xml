@@ -3,12 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="eef7a46e-f152-42de-8fd6-047dfed8c8fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/acceptance.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/acceptance.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/callbacks.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/callbacks.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/absence.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/absence.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/clusivity.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/clusivity.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/confirmation.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/confirmation.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/exclusion.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/exclusion.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/format.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/format.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/inclusion.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/inclusion.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/length.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/length.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/numericality.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/numericality.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/presence.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/presence.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/activemodel/lib/active_model/validations/validates.rb" beforeDir="false" afterPath="$PROJECT_DIR$/activemodel/lib/active_model/validations/validates.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

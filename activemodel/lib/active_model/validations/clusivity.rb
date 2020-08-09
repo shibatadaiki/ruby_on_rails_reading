@@ -15,6 +15,7 @@ module ActiveModel
       ERROR_MESSAGE = "An object with the method #include? or a proc, lambda or symbol is required, " \
                       "and must be supplied as the :in (or :within) option of the configuration hash"
 
+      # バリデーションの指定記述がそもそも成り立っているかの確認処理
       def check_validity!
         unless delimiter.respond_to?(:include?) || delimiter.respond_to?(:call) || delimiter.respond_to?(:to_sym)
           raise ArgumentError, ERROR_MESSAGE
@@ -23,6 +24,7 @@ module ActiveModel
 
     private
       def include?(record, value)
+        # options[:in] || options[:within]の中に入っている、メソッド名を呼び出す値を呼び出す
         members = if delimiter.respond_to?(:call)
           delimiter.call(record)
         elsif delimiter.respond_to?(:to_sym)
