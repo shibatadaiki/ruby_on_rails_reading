@@ -1,3 +1,7 @@
+# done
+
+# activemodelというgemの情報
+
 # frozen_string_literal: true
 
 version = File.read(File.expand_path("../RAILS_VERSION", __dir__)).strip

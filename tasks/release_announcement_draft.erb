@@ -1,3 +1,5 @@
+<!--done-->
+
 Hi everyone,
 
 I am happy to announce that Rails <%= versions.join(" and ") %> <%= versions.size > 1 ? "have" : "has" %> been released.
@@ -43,3 +45,49 @@ $ shasum -a 256 *-<%= version %>.gem
 
 <% end %>
 As always, huge thanks to the many contributors who helped with this release.
+
+<!--皆さんこんにちは、-->
+
+<!--Rails <％= versions.join（ "and"）％> <％= versions.size> 1であることをお知らせいたします。 "持っている"： "持っている"％>がリリースされました。-->
+
+<!--<％if future_date％>-->
+<!--回帰が見つからない場合は、<％= future_date.strftime（ "％A、％B％-d、％Y"）％>の最終リリースを期待してください。-->
+<!--見つかった場合は、[GitHubの問題]（https://github.com/rails/rails/issues/new）を開いてください。-->
+<!--<％= "それについて私（@＃{github_user}）に言及してください。" github_user.empty？ ％>最終リリース前に修正できるようにします。-->
+<!--<％終了％>-->
+<!--<％versions.each do | version | ％>-->
+
+<!--## <％= version.previous％>以降の変更-->
+
+<!--各gemの変更を表示するには、GitHubの変更ログをご覧ください。-->
+<!--<％FRAMEWORKS.sort.each do | framework | ％>-->
+<!--<％= "* [＃{FRAMEWORK_NAMES [framework]} CHANGELOG]（https://github.com/rails/rails/blob/v# {version} /＃{framework} /CHANGELOG.md）"％>-->
+
+<!--<％終了％>-->
+
+<!--変更の概要を確認するには、GitHubのリリースをご覧ください。-->
+
+<!--<％= "[＃{version} CHANGELOG]（https://github.com/rails/rails/releases/tag/v# {version}）"％>-->
+
+
+<!--*完全なリスト*-->
+
+<!--変更の完全なリストを表示するには、[上のすべてのコミットを確認してください-->
+<!--GitHub]（https://github.com/rails/rails/compare/v <％= "＃{version.previous} ... v＃{version}"％>）。-->
+<!--<％終了％>-->
+
+<!--## SHA-256-->
+
+<!--あなたの宝石が私がアップロードしたものと同じであることを確認したい場合は、-->
+<!--これらのSHA-256ハッシュを使用してください。-->
+
+<!--<％versions.each do | version | ％>-->
+<!--<％=バージョン％>のチェックサムは次のとおりです：-->
+
+<!--「」-->
+<!--$ shasum -a 256 *-<％=バージョン％>。gem-->
+<!--<％= `shasum -a 256 *-＃{version} .gem`％>-->
+<!--「」-->
+
+<!--<％終了％>-->
+<!--いつものように、このリリースを助けてくれた多くの貢献者に大きな感謝を捧げます。-->

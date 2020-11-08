@@ -1,10 +1,43 @@
+# done
+
 # frozen_string_literal: true
 
 require "cases/helper"
 
+#テスト "from_database +データベースからの型キャストの読み取り"
+#テスト "from_user +ユーザーからの型キャストを読み取る"
+#テスト「読み取りは値を記憶する」
+#テストは「読み取りは偽の値を記憶する」を行う
+#テスト「read_before_typecastは指定された値を返します」
+#「from_database + read_for_databaseタイプのデータベースへのキャストおよびデータベースからのキャスト」をテストします。
+#「from_user + read_for_databaseタイプキャストをユーザーからデータベースにキャストする」テスト
+#テスト "値を複製する"を行う
+#テスト「値を複製できない場合、値を複製しても値は複製されません」
+#テスト「型キャストをまだ行っていない場合、ダッピングは熱心に型キャストを行わない」
+#テスト「with_value_from_userは、ユーザーからの値を持つ新しい属性を返します」
+#テスト "with_value_from_databaseはデータベースからの値を持つ新しい属性を返します"
+#テスト「ブロックが値に与えられた場合、初期化されていない属性はその名前を生成します」
+#テスト「初期化されていない属性には値がありません」
+#「属性が同じコンストラクター引数を持つ他の属性と等しい」テスト
+#「属性が異なる名前の属性と等しくない」テスト
+#「属性が異なるタイプの属性と等しくない」テスト
+#「属性は異なる値の属性と等しくない」テスト
+#「属性が他のクラスの属性と等しくない」テスト
+#テスト「デフォルトでは属性は読み込まれていません」
+#テスト「値が計算されたときに属性が読み込まれた」
+#テスト「属性が割り当てられていないか変更されていない場合、属性は変更されません」
+#「新しい値が割り当てられると、属性が変更される」テスト
+#テスト「同じ値が割り当てられている場合、属性は変更されません」
+#テスト 読み取られていない属性は変更できません。そして、高価な計算をスキップします」
+#「属性が変更されている場合、属性が変更される」テスト
+#「属性は変更を忘れることができる」テスト
+#「with_value_from_userが値を検証する」テスト
+#「with_typeは変異を保持する」テスト
+
 module ActiveModel
   class AttributeTest < ActiveModel::TestCase
     setup do
+      # https://qiita.com/koshilife/items/dcb1fc7ac0c4a676c17c
       @type = Minitest::Mock.new
     end
 
@@ -13,6 +46,10 @@ module ActiveModel
     end
 
     test "from_database + read type casts from database" do
+
+      # 第一引数にコールされるメソッド名, 第二引数に返却値, 第三引数にメソッドコール時に指定する引数
+      #
+      # deserializeは文字列からオブジェクトを復元する処理
       @type.expect(:deserialize, "type cast from database", ["a value"])
       attribute = Attribute.from_database(nil, "a value", @type)
 

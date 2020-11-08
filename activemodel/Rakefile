@@ -1,5 +1,9 @@
+# done
+
 # frozen_string_literal: true
 
+# rake/testtaskはユニットテストを実行するためのタスクを作成するクラス。MiniTestのテスト実行するタスクを動的に生成している的な感じ
+# https://docs.ruby-lang.org/ja/latest/class/Rake=3a=3aTestTask.html
 require "rake/testtask"
 
 task default: :test
@@ -14,9 +18,22 @@ Rake::TestTask.new do |t|
   t.ruby_opts = ["--dev"] if defined?(JRUBY_VERSION)
 end
 
+# __dir__は現在実行しているスクリプトのディレクトリパスを取得するやつ。rails newで立てられたアプリのカレントディレクリを取得して、
+# isolated -> Ruby実行時に/test/**/*_test.rbのテストファイルをあらかじめ読み込んでおくためのタスクのような感じ？？
 namespace :test do
   task :isolated do
     Dir.glob("#{__dir__}/test/**/*_test.rb").all? do |file|
+      # Gem.ruby -> Gemというモジュールの「ruby」メソッドを実行。rubyのありかを示す
+      #   irb(main):001:0> Gem
+      #   => Gem
+      #   irb(main):002:0> Gem.ruby
+      #   => "/Users/xxxxxxxxxxxx/.rbenv/versions/2.7.1/bin/ruby"
+      #
+      # Gem.rubyによって示されたパスで「rubyコマンド」を実行（Rubyインタプリタの起動。下記URL参照）
+      # https://docs.ruby-lang.org/ja/latest/doc/spec=2frubycmd.html
+      #   --version Rubyのバージョンを表示します。
+      #   -w バージョンの表示を行う事無く冗長モードになります。
+      #   -I directory ファイルをロードするパスを指定(追加)します。指定されたディレクトリはRubyの配列変数($:)に追加されます。
       sh(Gem.ruby, "-w", "-I#{__dir__}/lib", "-I#{__dir__}/test", file)
     end || raise("Failures")
   end

@@ -1,13 +1,20 @@
+# done
+
 # frozen_string_literal: true
 
 require "active_support/core_ext/array/extract_options"
 
 module ActiveModel
   module Validations
+    # activemodel/lib/active_model/validator.rbのclass EachValidator < Validatorを継承
     class WithValidator < EachValidator # :nodoc:
       def validate_each(record, attr, val)
         method_name = options[:with]
 
+        # https://docs.ruby-lang.org/ja/latest/method/Method/i/arity.html
+        # arity -> Integer[permalink][rdoc]
+        #メソッドが受け付ける引数の数を返します。
+        #ただし、メソッドが可変長引数を受け付ける場合、負の整数
         if record.method(method_name).arity == 0
           record.send method_name
         else
@@ -16,9 +23,10 @@ module ActiveModel
       end
     end
 
+    # validations module（を付与しているClass）にクラスメソッドを追加する
     module ClassMethods
-      # Passes the record off to the class or classes specified and allows them
-      # to add errors based on more complex conditions.
+      #＃レコードを指定された1つまたは複数のクラスに渡し、それらを許可します
+      #＃より複雑な条件に基づいてエラーを追加します。      #
       #
       #   class Person
       #     include ActiveModel::Validations
@@ -39,6 +47,7 @@ module ActiveModel
       #   end
       #
       # You may also pass it multiple classes, like so:
+      # 次のように、複数のクラスを渡すこともできます。
       #
       #   class Person
       #     include ActiveModel::Validations
@@ -68,6 +77,29 @@ module ActiveModel
       # If you pass any additional configuration options, they will be passed
       # to the class and available as +options+:
       #
+      # ＃設定オプション：
+      #      ＃* <tt>：on </ tt>-この検証がアクティブなコンテキストを指定します。
+      #      ＃デフォルトではすべての検証コンテキストで実行されます+ nil +。シンボルを渡すことができます
+      #      ＃またはシンボルの配列。 （例：<tt> on：：create </ tt>または
+      #      ＃<tt> on：：custom_validation_context </ tt>または
+      #      ＃<tt> on：[：create、：custom_validation_context] </ tt>）
+      #      ＃* <tt>：if </ tt>-決定するために呼び出すメソッド、プロシージャ、または文字列を指定します
+      #      ＃検証が必要な場合（例：<tt> if：：allow_validation </ tt>、
+      #      ＃または<tt> if：Proc.new {| user | user.signup_step> 2} </ tt>）。
+      #      ＃メソッド、プロシージャ、または文字列は、+ true +または
+      #      ＃+ false +値。
+      #      ＃* <tt>：unless </ tt>-呼び出すメソッド、プロシージャ、または文字列を指定します
+      #      ＃検証を行わないかどうかを決定
+      #      ＃（例：<tt> unless：：skip_validation </ tt>、または
+      #      ＃<tt>以下を除く：Proc.new {| user | user.signup_step <= 2} </ tt>）。
+      #      ＃メソッド、プロシージャ、または文字列は、+ true +または
+      #      ＃+ false +値。
+      #      ＃* <tt>：strict </ tt>-検証を厳密にする必要があるかどうかを指定します。
+      #      ＃詳細は、<tt> ActiveModel :: Validations＃validates！</ tt>を参照してください。
+      #      ＃
+      #      ＃追加の構成オプションを渡すと、それらが渡されます
+      #      ＃クラスに+ options +として利用可能：
+      #
       #   class Person
       #     include ActiveModel::Validations
       #     validates_with MyValidator, my_custom_key: 'my custom value'
@@ -78,18 +110,24 @@ module ActiveModel
       #       options[:my_custom_key] # => "my custom value"
       #     end
       #   end
+      #
+      # lib/active_model/validations/xxx.rbのクラスオブジェクトと、対象属性値を都度検証している！
       def validates_with(*args, &block)
         options = args.extract_options!
         options[:class] = self
 
+        # BlockValidatorオブジェクトとoptionsハッシュを同一にeachで回して
+        # _validators[attribute.to_sym] << validatorオブジェクトとして整理している？
         args.each do |klass|
           validator = klass.new(options, &block)
 
           if validator.respond_to?(:attributes) && !validator.attributes.empty?
+            # 属性値があれば属性値のキーにバリデーションオブジェクトを追加
             validator.attributes.each do |attribute|
               _validators[attribute.to_sym] << validator
             end
           else
+            # なければ削除？
             _validators[nil] << validator
           end
 
@@ -98,8 +136,8 @@ module ActiveModel
       end
     end
 
-    # Passes the record off to the class or classes specified and allows them
-    # to add errors based on more complex conditions.
+    #＃レコードを指定された1つまたは複数のクラスに渡し、それらを許可します
+    #＃より複雑な条件に基づいてエラーを追加します。    #
     #
     #   class Person
     #     include ActiveModel::Validations
@@ -111,10 +149,10 @@ module ActiveModel
     #     end
     #   end
     #
-    # Please consult the class method documentation for more information on
-    # creating your own validator.
-    #
-    # You may also pass it multiple classes, like so:
+    #＃詳細については、クラスメソッドのドキュメントを参照してください
+    #＃独自のバリデーターを作成します。
+    #＃
+    #＃次のように、複数のクラスを渡すこともできます。
     #
     #   class Person
     #     include ActiveModel::Validations
@@ -126,14 +164,14 @@ module ActiveModel
     #     end
     #   end
     #
-    # Standard configuration options (<tt>:on</tt>, <tt>:if</tt> and
-    # <tt>:unless</tt>), which are available on the class version of
-    # +validates_with+, should instead be placed on the +validates+ method
-    # as these are applied and tested in the callback.
-    #
-    # If you pass any additional configuration options, they will be passed
-    # to the class and available as +options+, please refer to the
-    # class version of this method for more information.
+    #＃標準構成オプション（<tt>：on </ tt>、<tt>：if </ tt>および
+    #＃<tt>：unless </ tt>）、クラスバージョンで利用可能
+    # ＃+ validates_with +、代わりに+ validates +メソッドに配置する必要があります
+    # ＃これらはコールバックで適用およびテストされるため。
+    # ＃
+    # ＃追加の構成オプションを渡すと、それらが渡されます
+    # ＃クラスに追加し、+ options +として使用できます。
+    # ＃詳細については、このメソッドのクラスバージョン。
     def validates_with(*args, &block)
       options = args.extract_options!
       options[:class] = self.class

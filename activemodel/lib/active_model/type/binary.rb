@@ -1,7 +1,11 @@
+# done
+
 # frozen_string_literal: true
 
 module ActiveModel
   module Type
+    # オブジェクトの属性に型定義された時の処理をするためのClass
+    # Date型だったら文字列型に変換する機能を追加
     class Binary < Value # :nodoc:
       def type
         :binary
@@ -40,6 +44,8 @@ module ActiveModel
         alias_method :to_str, :to_s
 
         def hex
+          # https://docs.ruby-lang.org/ja/latest/method/String/i/unpack1.html
+          # 書式文字列に従ってstr（バイナリデータを含む場合があります）をデコードし、最初に抽出された値を返します。
           @value.unpack1("H*")
         end
 

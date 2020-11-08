@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 require "active_support/core_ext/time/zones"
@@ -6,6 +8,7 @@ module ActiveModel
   module Type
     module Helpers # :nodoc: all
       module Timezone
+        # utcかそうでないかを判定している
         def is_utc?
           ::Time.zone_default.nil? || ::Time.zone_default.match?("UTC")
         end

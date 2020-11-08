@@ -1,14 +1,19 @@
+# done
+
 # frozen_string_literal: true
 
 module ActiveModel
   module Validations
     class AcceptanceValidator < EachValidator # :nodoc:
+      # allow_nilとpresent(1/true)のおpションを受け入れてから他のモジュールを遅延読み込みしている？
       def initialize(options)
         super({ allow_nil: true, accept: ["1", true] }.merge!(options))
         setup!(options[:class])
       end
 
       def validate_each(record, attribute, value)
+        # ["1", true]がvalueになければrecord.errors.add
+        # !Array(options[:accept]).include?(value) の処理で判定
         unless acceptable_option?(value)
           record.errors.add(attribute, :accepted, **options.except(:accept, :allow_nil))
         end
@@ -16,6 +21,7 @@ module ActiveModel
 
       private
         def setup!(klass)
+          # 属性の遅延定義
           define_attributes = LazilyDefineAttributes.new(attributes)
           klass.include(define_attributes) unless klass.included_modules.include?(define_attributes)
         end
@@ -30,6 +36,8 @@ module ActiveModel
           end
 
           def included(klass)
+            # https://docs.ruby-lang.org/ja/1.9.3/class/Mutex.html
+            # Mutex(Mutal Exclusion = 相互排他ロック)は共有データを並行アクセスから保護する ためにあります。
             @lock = Mutex.new
             mod = self
 
@@ -38,6 +46,9 @@ module ActiveModel
               super(method_name, include_private) || mod.matches?(method_name)
             end
 
+            # attributesがマッチしたら（ここので定義されている値と一致したら）method_missingをオーバーライドして
+            # なかったことにし、もう一度そのメソッドを実行する
+            # なかったら、superで普通にmethod_missingでエラーを起こす
             define_method(:method_missing) do |method_name, *args, &block|
               mod.define_on(klass)
               if mod.matches?(method_name)
@@ -53,7 +64,13 @@ module ActiveModel
             attributes.any? { |name| name == attr_name }
           end
 
+          # 遅延されてきた属性をattr_reader、attr_writerで再定義している？
           def define_on(klass)
+            # https://docs.ruby-lang.org/ja/latest/method/Thread=3a=3aMutex/i/synchronize.html
+            # synchronize { ... } -> object[permalink][rdoc]
+            # mutex をロックし、ブロックを実行します。実行後に必ず mutex のロックを解放します。
+            #
+            # 排他的に属性定義を実行する
             @lock&.synchronize do
               return unless @lock
 
@@ -80,31 +97,34 @@ module ActiveModel
     end
 
     module HelperMethods
-      # Encapsulates the pattern of wanting to validate the acceptance of a
-      # terms of service check box (or similar agreement).
+      #属性の遅延定義＃の承認を検証するパターンをカプセル化します。
+      #＃利用規約のチェックボックス（または同様の契約）。      #
       #
       #   class Person < ActiveRecord::Base
       #     validates_acceptance_of :terms_of_service
       #     validates_acceptance_of :eula, message: 'must be abided'
       #   end
       #
-      # If the database column does not exist, the +terms_of_service+ attribute
-      # is entirely virtual. This check is performed only if +terms_of_service+
-      # is not +nil+ and by default on save.
+      #＃データベース列が存在しない場合、+ terms_of_service +属性
+      #＃完全に仮想です。 このチェックは、+ terms_of_service +
+      #            ＃は+ nil +ではなく、デフォルトでは保存時です。
+      #＃
+      #＃設定オプション：
+      #＃* <tt>：message </ tt>-カスタムエラーメッセージ（デフォルトは「
+      # ＃承認されました」）。
+      # ＃* <tt>：accept </ tt>-受け入れられたと見なされる値を指定します。
+      #＃可能な値の配列も受け入れます。 デフォルト値は
+      #＃配列["1"、true]は、HTMLとの関連付けを容易にします
+      #＃チェックボックス。 検証する場合は、これを+ true +に設定するか、含める必要があります。
+      #＃属性は「1」から+ true +への型キャストであるため、データベース列
+      #＃検証前。
+      #＃
+      #＃すべてのバリデーターがサポートするデフォルトのオプションのリストもあります：
+      #＃+：if +、+：unless +、+：on +、+：allow_nil +、+：allow_blank +、+：strict +。
+      #＃詳細は、<tt> ActiveModel :: Validations＃validates </ tt>を参照してください。
       #
-      # Configuration options:
-      # * <tt>:message</tt> - A custom error message (default is: "must be
-      #   accepted").
-      # * <tt>:accept</tt> - Specifies a value that is considered accepted.
-      #   Also accepts an array of possible values. The default value is
-      #   an array ["1", true], which makes it easy to relate to an HTML
-      #   checkbox. This should be set to, or include, +true+ if you are validating
-      #   a database column, since the attribute is typecast from "1" to +true+
-      #   before validation.
-      #
-      # There is also a list of default options supported by every validator:
-      # +:if+, +:unless+, +:on+, +:allow_nil+, +:allow_blank+, and +:strict+.
-      # See <tt>ActiveModel::Validations#validates</tt> for more information.
+      # https://qiita.com/rkonno/items/b6c77a2e994c6e0e86df
+      # チェックボックスのバリデーションを追加できる
       def validates_acceptance_of(*attr_names)
         validates_with AcceptanceValidator, _merge_attributes(attr_names)
       end

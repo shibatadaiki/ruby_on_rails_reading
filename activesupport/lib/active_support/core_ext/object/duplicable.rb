@@ -1,48 +1,53 @@
+# done
+
 # frozen_string_literal: true
 
 #--
-# Most objects are cloneable, but not all. For example you can't dup methods:
-#
-#   method(:puts).dup # => TypeError: allocator undefined for Method
-#
-# Classes may signal their instances are not duplicable removing +dup+/+clone+
-# or raising exceptions from them. So, to dup an arbitrary object you normally
-# use an optimistic approach and are ready to catch an exception, say:
-#
-#   arbitrary_object.dup rescue object
-#
-# Rails dups objects in a few critical spots where they are not that arbitrary.
-# That rescue is very expensive (like 40 times slower than a predicate), and it
-# is often triggered.
-#
-# That's why we hardcode the following cases and check duplicable? instead of
-# using that rescue idiom.
+#＃ほとんどのオブジェクトは複製可能ですが、すべてではありません。 たとえば、メソッドを重複させることはできません。
+#＃
+#＃method（：puts）.dup＃=> TypeError：アロケータがメソッドに対して未定義
+#＃
+#＃クラスは+ dup + / + clone +を削除することでインスタンスが重複していないことを通知する場合があります
+#＃またはそれらから例外を発生させます。 したがって、通常は任意のオブジェクトを複製するには
+#＃楽観的なアプローチを使用し、例外をキャッチする準備ができている、と言う：
+#＃
+#＃arbitrary_object.dupレスキューオブジェクト
+#＃
+#＃Railsは、オブジェクトがそれほど恣意的ではないいくつかの重要な場所にオブジェクトを複製します。
+#＃その救助は非常に高価であり（述語より40倍遅い）、そしてそれは
+#＃は頻繁にトリガーされます。
+#＃
+#＃だからこそ、以下のケースをハードコーディングし、重複をチェックしていますか？ の代わりに
+#＃レスキューイディオムを使用します。
 #++
+
+# それぞれが複製できるかをチェックするメソッドをモンキーパッチ
+
 class Object
-  # Can you safely dup this object?
-  #
-  # False for method objects;
-  # true otherwise.
+  #＃このオブジェクトを安全に複製できますか？
+  #＃
+  #＃メソッドオブジェクトの場合はfalse。
+  #＃それ以外の場合はtrue。
   def duplicable?
     true
   end
 end
 
 class Method
-  # Methods are not duplicable:
-  #
-  #  method(:puts).duplicable? # => false
-  #  method(:puts).dup         # => TypeError: allocator undefined for Method
+  #＃メソッドは複製できません：
+  #＃
+  #＃method（：puts）.duplicable？ ＃=> false
+  #＃method（：puts）.dup＃=> TypeError：アロケータがメソッドに対して未定義
   def duplicable?
     false
   end
 end
 
 class UnboundMethod
-  # Unbound methods are not duplicable:
-  #
-  #  method(:puts).unbind.duplicable? # => false
-  #  method(:puts).unbind.dup         # => TypeError: allocator undefined for UnboundMethod
+  #＃バインドされていないメソッドは複製できません：
+  #＃
+  #＃method（：puts）.unbind.duplicable？ ＃=> false
+  #＃method（：puts）.unbind.dup＃=> TypeError：UnboundMethodのアロケーターが未定義
   def duplicable?
     false
   end

@@ -1,3 +1,5 @@
+done
+
 = Action Pack -- From request to response
 
 Action Pack is a framework for handling and responding to web requests. It
@@ -54,5 +56,65 @@ Bug reports for the Ruby on Rails project can be filed here:
 * https://github.com/rails/rails/issues
 
 Feature requests should be discussed on the rails-core mailing list here:
+
+* https://discuss.rubyonrails.org/c/rubyonrails-core
+
+
+=アクションパック-要求から応答まで
+
+アクションパックは、Webリクエストを処理して応答するためのフレームワークです。それ
+*ルーティング*（リクエストURLをアクションにマッピング）、定義するためのメカニズムを提供します
+アクションを実装し、レンダリングによって応答を生成する*コントローラー*
+*ビュー*。さまざまなフォーマットのテンプレートです。要するに、アクションパック
+MVCパラダイムでビューとコントローラーのレイヤーを提供します。
+
+それはいくつかのモジュールで構成されています：
+
+* Webリクエストに関する情報を解析するAction Dispatchが処理します
+  ユーザーが定義したルーティング、およびHTTPに関連する高度な処理を行う
+  MIMEタイプのネゴシエーション、POST、PATCH、またはPUT本体のパラメーターのデコードなど
+  HTTPキャッシングロジック、Cookie、およびセッションの処理。
+
+*アクションコントローラー。
+  リクエストを処理するためのフィルターとアクションを実装するためにサブクラス化されました。結果
+  アクションの通常は、ビューから生成されたコンテンツです。
+
+Ruby on Railsフレームワークでは、ユーザーは
+アクションコントローラモジュール。必要なアクションディスパッチ機能がアクティブ化されています
+デフォルトでは、アクションビューのレンダリングはアクションによって暗黙的にトリガーされます
+コントローラ。ただし、これらのモジュールは独自に機能するように設計されており、
+Rails外でも使用できます。
+
+アクションパックの詳細については、{アクションコントローラの概要} [https://guides.rubyonrails.org/action_controller_overview.html]ガイドをご覧ください。
+
+==ダウンロードとインストール
+
+RubyGemsを使用すると、アクションパックの最新バージョンをインストールできます。
+
+  $ gem install actionpack
+
+ソースコードは、GitHubのRailsプロジェクトの一部としてダウンロードできます。
+
+* https://github.com/rails/rails/tree/master/actionpack
+
+
+==ライセンス
+
+Action PackはMITライセンスでリリースされています。
+
+* https://opensource.org/licenses/MIT
+
+
+==サポート
+
+APIドキュメントは次の場所にあります。
+
+* https://api.rubyonrails.org
+
+Ruby on Railsプロジェクトのバグレポートはこちらから提出できます。
+
+* https://github.com/rails/rails/issues
+
+機能のリクエストは、以下のrails-coreメーリングリストで議論する必要があります。
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core

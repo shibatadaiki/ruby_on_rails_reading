@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 require "active_support/core_ext/hash/slice"
@@ -5,12 +7,12 @@ require "active_support/core_ext/hash/slice"
 module ActiveModel
   module Validations
     module ClassMethods
-      # This method is a shortcut to all default validators and any custom
-      # validator classes ending in 'Validator'. Note that Rails default
-      # validators can be overridden inside specific classes by creating
-      # custom validator classes in their place such as PresenceValidator.
-      #
-      # Examples of using the default rails validators:
+      # ＃このメソッドは、すべてのデフォルトのバリデーターとカスタム
+      #       ＃「バリデーター」で終わるバリデータークラス。 Railsのデフォルト
+      #       ＃バリデーターを作成することにより、特定のクラス内でオーバーライドできます
+      #       ＃PresenceValidatorなど、代わりにカスタムバリデータークラス。
+      #       ＃
+      #       ＃デフォルトのレールバリデーターの使用例：
       #
       #   validates :username, absence: true
       #   validates :terms, acceptance: true
@@ -22,8 +24,8 @@ module ActiveModel
       #   validates :age, numericality: true
       #   validates :username, presence: true
       #
-      # The power of the +validates+ method comes when using custom validators
-      # and default validators in one call for a given attribute.
+      # ＃+ validates +メソッドの威力は、カスタムバリデーターを使用するとき
+      #       ＃指定された属性の1回の呼び出しでのデフォルトのバリデーター。
       #
       #   class EmailValidator < ActiveModel::EachValidator
       #     def validate_each(record, attribute, value)
@@ -40,8 +42,8 @@ module ActiveModel
       #     validates :email, presence: true, email: true
       #   end
       #
-      # Validator classes may also exist within the class being validated
-      # allowing custom modules of validators to be included as needed.
+      # ＃バリデータークラスは、検証されるクラス内にも存在する可能性があります
+      #       ＃バリデーターのカスタムモジュールを必要に応じて含めることができます。
       #
       #   class Film
       #     include ActiveModel::Validations
@@ -55,84 +57,94 @@ module ActiveModel
       #     validates :name, title: true
       #   end
       #
-      # Additionally validator classes may be in another namespace and still
-      # used within any class.
+      # ＃さらに、バリデータークラスは別の名前空間にありますが、
+      #       ＃任意のクラス内で使用されます。
       #
       #   validates :name, :'film/title' => true
       #
-      # The validators hash can also handle regular expressions, ranges, arrays
-      # and strings in shortcut form.
+      # ＃バリデーターハッシュは正規表現、範囲、配列も処理できます
+      #       ＃およびショートカット形式の文字列。
       #
       #   validates :email, format: /@/
       #   validates :role, inclusion: %w(admin contributor)
       #   validates :password, length: 6..20
       #
-      # When using shortcut form, ranges and arrays are passed to your
-      # validator's initializer as <tt>options[:in]</tt> while other types
-      # including regular expressions and strings are passed as <tt>options[:with]</tt>.
-      #
-      # There is also a list of options that could be used along with validators:
-      #
-      # * <tt>:on</tt> - Specifies the contexts where this validation is active.
-      #   Runs in all validation contexts by default +nil+. You can pass a symbol
-      #   or an array of symbols. (e.g. <tt>on: :create</tt> or
-      #   <tt>on: :custom_validation_context</tt> or
-      #   <tt>on: [:create, :custom_validation_context]</tt>)
-      # * <tt>:if</tt> - Specifies a method, proc or string to call to determine
-      #   if the validation should occur (e.g. <tt>if: :allow_validation</tt>,
-      #   or <tt>if: Proc.new { |user| user.signup_step > 2 }</tt>). The method,
-      #   proc or string should return or evaluate to a +true+ or +false+ value.
-      # * <tt>:unless</tt> - Specifies a method, proc or string to call to determine
-      #   if the validation should not occur (e.g. <tt>unless: :skip_validation</tt>,
-      #   or <tt>unless: Proc.new { |user| user.signup_step <= 2 }</tt>). The
-      #   method, proc or string should return or evaluate to a +true+ or
-      #   +false+ value.
-      # * <tt>:allow_nil</tt> - Skip validation if the attribute is +nil+.
-      # * <tt>:allow_blank</tt> - Skip validation if the attribute is blank.
-      # * <tt>:strict</tt> - If the <tt>:strict</tt> option is set to true
-      #   will raise ActiveModel::StrictValidationFailed instead of adding the error.
-      #   <tt>:strict</tt> option can also be set to any other exception.
+      # ＃ショートカットフォームを使用すると、範囲と配列が
+      #      ＃バリデーターの初期化子を<tt> options [：in] </ tt>として、他の型
+      #      ＃正規表現と文字列を含めて、<tt> options [：with] </ tt>として渡されます。
+      #      ＃
+      #      ＃バリデータと共に使用できるオプションのリストもあります：
+      #      ＃
+      #      ＃* <tt>：on </ tt>-この検証がアクティブなコンテキストを指定します。
+      #      ＃デフォルトではすべての検証コンテキストで実行されます+ nil +。シンボルを渡すことができます
+      #      ＃またはシンボルの配列。 （例：<tt> on：：create </ tt>または
+      #      ＃<tt> on：：custom_validation_context </ tt>または
+      #      ＃<tt> on：[：create、：custom_validation_context] </ tt>）
+      #      ＃* <tt>：if </ tt>-決定するために呼び出すメソッド、プロシージャ、または文字列を指定します
+      #      ＃検証が必要な場合（例：<tt> if：：allow_validation </ tt>、
+      #      ＃または<tt> if：Proc.new {| user | user.signup_step> 2} </ tt>）。メソッド、
+      #      ＃procまたはstringは、+ true +または+ false +の値を返すか評価する必要があります。
+      #      ＃* <tt>：unless </ tt>-決定するために呼び出すメソッド、プロシージャ、または文字列を指定します
+      #      ＃検証を行わない場合（例：<tt> unless：：skip_validation </ tt>、
+      #      ＃または<tt> unless：Proc.new {| user | user.signup_step <= 2} </ tt>）。の
+      #      ＃メソッド、プロシージャ、または文字列は、+ true +を返すか、評価する必要があります。
+      #      ＃+ false +値。
+      #      ＃* <tt>：allow_nil </ tt>-属性が+ nil +の場合、検証をスキップします。
+      #      ＃* <tt>：allow_blank </ tt>-属性が空白の場合、検証をスキップします
+      #      ＃* <tt>：strict </ tt>-<tt>：strict </ tt>オプションがtrueに設定されている場合
+      #      ＃エラーを追加する代わりにActiveModel :: StrictValidationFailedを発生させます。
+      #      ＃<tt>：strict </ tt>オプションは、その他の例外にも設定できます。
       #
       # Example:
       #
       #   validates :password, presence: true, confirmation: true, if: :password_required?
       #   validates :token, length: 24, strict: TokenLengthException
       #
-      #
-      # Finally, the options +:if+, +:unless+, +:on+, +:allow_blank+, +:allow_nil+, +:strict+
-      # and +:message+ can be given to one specific validator, as a hash:
+      # ＃最後に、オプション+：if +、+：unless +、+：on +、+：allow_blank +、+：allow_nil +、+：strict +
+      #       ＃と+：message +は、特定のバリデーターにハッシュとして与えることができます：
       #
       #   validates :password, presence: { if: :password_required?, message: 'is forgotten.' }, confirmation: true
       def validates(*attributes)
+        # optionsのみを抽出してdup
         defaults = attributes.extract_options!.dup
+        # default_keyの中に含まれているバリデーションをsliceして取り出す
         validations = defaults.slice!(*_validates_default_keys)
 
+        # 少なくとも1つのattribute, validationを指定する必要があります
         raise ArgumentError, "You need to supply at least one attribute" if attributes.empty?
         raise ArgumentError, "You need to supply at least one validation" if validations.empty?
 
+        # default(options)にattributesをセット
         defaults[:attributes] = attributes
 
         validations.each do |key, options|
           key = "#{key.to_s.camelize}Validator"
 
+          # カスタムバリデーターなどの時の検証用に？バリデータークラスが正常に定義されているかを確認
           begin
+            # constantize -> Railsのクラスにアクセス
+            # const_get => name で指定される名前の定数の値を取り出します。
+            #              Module#const_defined? と違って Object を特別扱いすることはありません。
             validator = key.include?("::") ? key.constantize : const_get(key)
           rescue NameError
             raise ArgumentError, "Unknown validator: '#{key}'"
           end
 
+          # そのクラスに特にバリデーションが指定されていなかったらスルー
           next unless options
 
+          # active_model/validations/xxx.rbにある各種バリデーションファイルと、カスタムバリデーターファイルの
+          # バリデーション処理を validates_with でセッティングする。
           validates_with(validator, defaults.merge(_parse_validates_options(options)))
         end
       end
 
-      # This method is used to define validations that cannot be corrected by end
-      # users and are considered exceptional. So each validator defined with bang
-      # or <tt>:strict</tt> option set to <tt>true</tt> will always raise
-      # <tt>ActiveModel::StrictValidationFailed</tt> instead of adding error
-      # when validation fails. See <tt>validates</tt> for more information about
-      # the validation itself.
+      # ＃このメソッドは、最後まで修正できない検証を定義するために使用されます
+      #       ＃人のユーザーがあり、例外的と見なされています。 つまり、bangで定義された各バリデーター
+      #       ＃または<tt>：strict </ tt>オプションを<tt> true </ tt>に設定すると、常に発生します
+      #       ＃エラーを追加する代わりに<tt> ActiveModel :: StrictValidationFailed </ tt>
+      #       ＃検証が失敗した場合。 詳細については、<tt>検証</ tt>を参照してください
+      #       ＃検証自体。
       #
       #   class Person
       #     include ActiveModel::Validations
@@ -145,19 +157,26 @@ module ActiveModel
       #   person.name = ''
       #   person.valid?
       #   # => ActiveModel::StrictValidationFailed: Name can't be blank
+      #
+      # validates! -> 強制的に例外を出すバリデーションを設定
       def validates!(*attributes)
         options = attributes.extract_options!
         options[:strict] = true
         validates(*(attributes << options))
       end
 
+      # ActiveModel::EachValidatorなどのカスタムバリデーターをActiveModel::EachValidatorを継承することで作成できる
+      # （わかりづらそう）
     private
-      # When creating custom validators, it might be useful to be able to specify
-      # additional default keys. This can be done by overwriting this method.
+      # ＃カスタムバリデーターを作成するとき、指定できると便利かもしれません
+      #       ＃追加のデフォルトキー。 これは、このメソッドを上書きすることで実行できます。
+      #
+      # default_keyをハッシュのkeyにしてバリデーションに追加するメソッドを指定する
       def _validates_default_keys
         [:if, :unless, :on, :allow_blank, :allow_nil, :strict]
       end
 
+      # 送られてきた生のoption値を、Validationsで使うoptions形式（Hash形式）にparseする
       def _parse_validates_options(options)
         case options
         when TrueClass

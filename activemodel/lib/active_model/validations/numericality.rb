@@ -1,11 +1,14 @@
+# done
+
 # frozen_string_literal: true
 
 require "bigdecimal/util"
 
 module ActiveModel
   module Validations
+    # 数字バリデーション
     class NumericalityValidator < EachValidator # :nodoc:
-      CHECKS = { greater_than: :>, greater_than_or_equal_to: :>=,
+      CHECKS = { ,
                  equal_to: :==, less_than: :<, less_than_or_equal_to: :<=,
                  odd: :odd?, even: :even?, other_than: :!= }.freeze
 
@@ -15,6 +18,7 @@ module ActiveModel
 
       def check_validity!
         keys = CHECKS.keys - [:odd, :even]
+        # 引数エラーチェック
         options.slice(*keys).each do |option, value|
           unless value.is_a?(Numeric) || value.is_a?(Proc) || value.is_a?(Symbol)
             raise ArgumentError, ":#{option} must be a number, a symbol or a proc"
@@ -43,6 +47,7 @@ module ActiveModel
           raw_value = value
         end
 
+        # 指定された属性の値が数値であるかどうかを検証
         unless is_number?(raw_value, precision, scale)
           record.errors.add(attr_name, :not_a_number, **filtered_options(raw_value))
           return
@@ -55,22 +60,27 @@ module ActiveModel
 
         value = parse_as_number(raw_value, precision, scale)
 
+        # 指定された属性の値が数値であるか以降のオプションチェック
         options.slice(*CHECKS.keys).each do |option, option_value|
           case option
           when :odd, :even
+            # send -> odd: :odd?, even: :even?
             unless value.to_i.send(CHECKS[option])
               record.errors.add(attr_name, option, **filtered_options(value))
             end
           else
             case option_value
             when Proc
+              # option_value.call(record) -> ユーザーが指定したオプションブロックを実行
               option_value = option_value.call(record)
             when Symbol
+              # send(option_value) -> greater_than: :>, greater_than_or_equal_to: :>=などを実行
               option_value = record.send(option_value)
             end
 
             option_value = parse_as_number(option_value, precision, scale)
 
+            # send -> その他オプション
             unless value.send(CHECKS[option], option_value)
               record.errors.add(attr_name, option, **filtered_options(value).merge!(count: option_value))
             end
@@ -79,6 +89,7 @@ module ActiveModel
       end
 
     private
+      #　指定された度数の数字に変換
       def parse_as_number(raw_value, precision, scale)
         if raw_value.is_a?(Float)
           parse_float(raw_value, precision, scale)
@@ -115,6 +126,7 @@ module ActiveModel
         filtered
       end
 
+      # Symbol, Procであれば指定の任意処理を実行
       def allow_only_integer?(record)
         case options[:only_integer]
         when Symbol
@@ -133,51 +145,51 @@ module ActiveModel
     end
 
     module HelperMethods
-      # Validates whether the value of the specified attribute is numeric by
-      # trying to convert it to a float with Kernel.Float (if <tt>only_integer</tt>
-      # is +false+) or applying it to the regular expression <tt>/\A[\+\-]?\d+\z/</tt>
-      # (if <tt>only_integer</tt> is set to +true+). Precision of Kernel.Float values
-      # are guaranteed up to 15 digits.
+      # ＃指定された属性の値が数値であるかどうかを検証します
+      #       ＃Kernel.Floatでフロートに変換しようとしている（<tt> only_integer </ tt>の場合）
+      #       ＃は+ false +）または正規表現に適用<tt> / \ A [\ + \-]？\ d + \ z / </ tt>
+      #       ＃（<tt> only_integer </ tt>が+ true +に設定されている場合）。 Kernel.Float値の精度
+      #       ＃は15桁まで保証されます。
       #
       #   class Person < ActiveRecord::Base
       #     validates_numericality_of :value, on: :create
       #   end
       #
-      # Configuration options:
-      # * <tt>:message</tt> - A custom error message (default is: "is not a number").
-      # * <tt>:only_integer</tt> - Specifies whether the value has to be an
-      #   integer, e.g. an integral value (default is +false+).
-      # * <tt>:allow_nil</tt> - Skip validation if attribute is +nil+ (default is
-      #   +false+). Notice that for Integer and Float columns empty strings are
-      #   converted to +nil+.
-      # * <tt>:greater_than</tt> - Specifies the value must be greater than the
-      #   supplied value.
-      # * <tt>:greater_than_or_equal_to</tt> - Specifies the value must be
-      #   greater than or equal the supplied value.
-      # * <tt>:equal_to</tt> - Specifies the value must be equal to the supplied
-      #   value.
-      # * <tt>:less_than</tt> - Specifies the value must be less than the
-      #   supplied value.
-      # * <tt>:less_than_or_equal_to</tt> - Specifies the value must be less
-      #   than or equal the supplied value.
-      # * <tt>:other_than</tt> - Specifies the value must be other than the
-      #   supplied value.
-      # * <tt>:odd</tt> - Specifies the value must be an odd number.
-      # * <tt>:even</tt> - Specifies the value must be an even number.
-      #
-      # There is also a list of default options supported by every validator:
-      # +:if+, +:unless+, +:on+, +:allow_nil+, +:allow_blank+, and +:strict+ .
-      # See <tt>ActiveModel::Validations#validates</tt> for more information
-      #
-      # The following checks can also be supplied with a proc or a symbol which
-      # corresponds to a method:
-      #
-      # * <tt>:greater_than</tt>
-      # * <tt>:greater_than_or_equal_to</tt>
-      # * <tt>:equal_to</tt>
-      # * <tt>:less_than</tt>
-      # * <tt>:less_than_or_equal_to</tt>
-      # * <tt>:only_integer</tt>
+      # ＃設定オプション：
+      #      ＃* <tt>：message </ tt>-カスタムエラーメッセージ（デフォルトは「is not a number」です）。
+      #      ＃* <tt>：only_integer </ tt>-値が
+      #      ＃整数、例えば整数値（デフォルトは+ false +）。
+      #      ＃* <tt>：allow_nil </ tt>-属性が+ nil +の場合、検証をスキップします（デフォルトは
+      #      ＃+ false +）。 Integer列とFloat列の場合、空の文字列は
+      #      ＃+ nil +に変換されます。
+      #      ＃* <tt>：greater_than </ tt>-値が
+      #      ＃指定された値。
+      #      ＃* <tt>：greater_than_or_equal_to </ tt>-値が
+      #      ＃指定された値以上。
+      #      ＃* <tt>：equal_to </ tt>-値が指定された値と等しくなければならないことを指定します
+      #      ＃値。
+      #      ＃* <tt>：less_than </ tt>-値が
+      #      ＃指定された値。
+      #      ＃* <tt>：less_than_or_equal_to </ tt>-値を小さくする必要があることを指定します
+      #      ＃指定された値以上。
+      #      ＃* <tt>：other_than </ tt>-値が
+      #      ＃指定された値。
+      #      ＃* <tt>：odd </ tt>-値が奇数でなければならないことを指定します。
+      #      ＃* <tt>：even </ tt>-値が偶数でなければならないことを指定します。
+      #      ＃
+      #      ＃すべてのバリデーターがサポートするデフォルトのオプションのリストもあります：
+      #      ＃+：if +、+：unless +、+：on +、+：allow_nil +、+：allow_blank +、+：strict +。
+      #      ＃詳細は、<tt> ActiveModel :: Validations＃validates </ tt>を参照してください
+      #      ＃
+      #      ＃次のチェックは、プロシージャまたはシンボルで提供することもできます。
+      #      ＃メソッドに対応：
+      #      ＃
+      #      ＃* <tt>：greater_than </ tt>
+      #      ＃* <tt>：greater_than_or_equal_to </ tt>
+      #      ＃* <tt>：equal_to </ tt>
+      #      ＃* <tt>：less_than </ tt>
+      #      ＃* <tt>：less_than_or_equal_to </ tt>
+      #      ＃* <tt>：only_integer </ tt>
       #
       # For example:
       #

@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 require "cases/helper"
@@ -7,11 +9,13 @@ module ActiveModel
     class DateTimeTest < ActiveModel::TestCase
       def test_type_cast_datetime_and_timestamp
         type = Type::DateTime.new
+        # 時間を作れなかったらnilになる
         assert_nil type.cast(nil)
         assert_nil type.cast("")
         assert_nil type.cast("  ")
         assert_nil type.cast("ABC")
 
+        #　castしてもstrftimeで同一の文字列になる
         datetime_string = ::Time.now.utc.strftime("%FT%T")
         assert_equal datetime_string, type.cast(datetime_string).strftime("%FT%T")
       end
@@ -30,6 +34,7 @@ module ActiveModel
         assert_equal ::Time.utc(2018, 10, 15, 0, 0, 0), type.cast(1 => 2018, 2 => 10, 3 => 15)
       end
 
+      # DateTimeを生成するのに足りないkeyを引数指定したらエラー
       def test_hash_with_wrong_keys
         type = Type::DateTime.new
         error = assert_raises(ArgumentError) { type.cast(a: 1) }

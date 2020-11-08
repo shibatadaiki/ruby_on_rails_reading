@@ -1,7 +1,10 @@
+# done
+
 # frozen_string_literal: true
 
 module ActiveModel
   module Validations
+    # 値の存在チェック -> if value.blank?
     class PresenceValidator < EachValidator # :nodoc:
       def validate_each(record, attr_name, value)
         record.errors.add(attr_name, :blank, **options) if value.blank?
@@ -9,28 +12,28 @@ module ActiveModel
     end
 
     module HelperMethods
-      # Validates that the specified attributes are not blank (as defined by
-      # Object#blank?). Happens by default on save.
+      # ＃指定された属性が空白ではないことを検証します（
+      #       ＃Object＃blank？）。 保存時にデフォルトで発生します。 #
       #
       #   class Person < ActiveRecord::Base
       #     validates_presence_of :first_name
       #   end
       #
-      # The first_name attribute must be in the object and it cannot be blank.
-      #
-      # If you want to validate the presence of a boolean field (where the real
-      # values are +true+ and +false+), you will want to use
-      # <tt>validates_inclusion_of :field_name, in: [true, false]</tt>.
-      #
-      # This is due to the way Object#blank? handles boolean values:
-      # <tt>false.blank? # => true</tt>.
-      #
-      # Configuration options:
-      # * <tt>:message</tt> - A custom error message (default is: "can't be blank").
-      #
-      # There is also a list of default options supported by every validator:
-      # +:if+, +:unless+, +:on+, +:allow_nil+, +:allow_blank+, and +:strict+.
-      # See <tt>ActiveModel::Validations#validates</tt> for more information
+      # ＃first_name属性はオブジェクト内にある必要があり、空白にすることはできません。
+      #       ＃
+      #       ＃ブール値フィールドの存在を検証したい場合（実際の
+      #       ＃値は+ true +および+ false +）であり、使用する必要があります
+      #       ＃<tt> validates_inclusion_of：field_name、in：[true、false] </ tt>。
+      #       ＃
+      #       ＃これはObject＃blankの方法によるものですか？ ブール値を処理します。
+      #       ＃<tt> false.blank？ ＃=> true </ tt>。
+      #       ＃
+      #       ＃設定オプション：
+      #       ＃* <tt>：message </ tt>-カスタムエラーメッセージ（デフォルトは「空白にすることはできません」）。
+      #       ＃
+      #       ＃すべてのバリデーターがサポートするデフォルトのオプションのリストもあります：
+      #       ＃+：if +、+：unless +、+：on +、+：allow_nil +、+：allow_blank +、+：strict +。
+      #       ＃詳細は、<tt> ActiveModel :: Validations＃validates </ tt>を参照してください
       def validates_presence_of(*attr_names)
         validates_with PresenceValidator, _merge_attributes(attr_names)
       end

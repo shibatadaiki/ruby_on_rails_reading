@@ -1,4 +1,13 @@
+# done
+
 # frozen_string_literal: true
+
+# [1] pry(main)> 22.68.to_d
+# => 0.2268e2
+# [2] pry(main)> BigDecimal("0.33")
+# => 0.33e0
+# [3] pry(main)> BigDecimal("1.250")
+# => 0.125e1
 
 require "cases/helper"
 

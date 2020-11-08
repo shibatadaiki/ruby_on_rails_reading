@@ -1,3 +1,5 @@
+done
+
 # Active Job – Make work happen later
 
 Active Job is a framework for declaring jobs and making them run on a variety
@@ -129,5 +131,140 @@ Bug reports for the Ruby on Rails project can be filed here:
 * https://github.com/rails/rails/issues
 
 Feature requests should be discussed on the rails-core mailing list here:
+
+* https://discuss.rubyonrails.org/c/rubyonrails-core
+
+
+＃アクティブなジョブ–仕事を後で行う
+
+Active Jobは、ジョブを宣言してさまざまなジョブで実行させるためのフレームワークです。
+キューイングバックエンドの。これらのジョブは、定期的にスケジュールされたものから
+クリーンアップ、請求料金、郵送。切り刻むことができるもの
+小さな作業単位と並行して実行します。
+
+アクションメーラーの#deliver_later機能のバックエンドとしても機能します
+これにより、メールを後で実行するジョブに簡単に変換できます。それは
+最新のWebアプリケーションで最も一般的な仕事の1つ：外部へのメール送信
+リクエスト-レスポンスサイクルのので、ユーザーはそれを待つ必要がありません。
+
+重要な点は、すべてのRailsアプリがジョブインフラストラクチャーを持つことを保証することです
+「即時ランナー」の形式であっても、適切に配置されます。その後、
+フレームワークの機能と他の宝石はその上に構築され、心配する必要はありません
+遅延ジョブとResqueのAPIの違いについて。キューを選ぶ
+その場合、バックエンドは運用上の関心事になります。そして、あなたはできるようになります
+ジョブを書き直さなくても、それらを切り替えることができます。
+
+アクティブジョブの詳細については、[アクティブジョブの基本]（https://edgeguides.rubyonrails.org/active_job_basics.html）ガイドをご覧ください。
+
+＃＃ 使用法
+
+優先キューイングバックエンドの使用方法については、そのアダプターを参照してください
+のドキュメント
+[ActiveJob :: QueueAdapters]（https://api.rubyonrails.org/classes/ActiveJob/QueueAdapters.html）。
+
+次のようにジョブを宣言します。
+
+「ルビー
+クラスMyJob <ActiveJob :: Base
+  queue_as：my_jobs
+
+  def perform（record）
+    record.do_work
+  終わり
+終わり
+「」
+
+次のようにジョブをエンキューします。
+
+「ルビー
+MyJob.perform_laterレコード＃キューシステムが解放されるとすぐに実行されるジョブをエンキューします。
+「」
+
+「ルビー
+MyJob.set（wait_until：Date.tomorrow.noon）.perform_later（record）＃明日の正午に実行するジョブをエンキューします。
+「」
+
+「ルビー
+MyJob.set（wait：1.week）.perform_later（record）＃1週間後に実行されるジョブをエンキューします。
+「」
+
+それでおしまい！
+
+
+## GlobalIDのサポート
+
+アクティブジョブは、パラメーターの[GlobalIDシリアル化]（https://github.com/rails/globalid/）をサポートしています。これにより、
+クラス/ IDのペアではなく、アクティブなActive Recordオブジェクトをジョブに渡します。
+その後、手動で逆シリアル化する必要があります。以前は、ジョブは次のようになっていました。
+
+「ルビー
+クラスTrashableCleanupJob
+  def perform（trashable_class、trashable_id、depth）
+    trashable = trashable_class.constantize.find（trashable_id）
+    trashable.cleanup（深さ）
+  終わり
+終わり
+「」
+
+今、あなたは単に行うことができます：
+
+「ルビー
+クラスTrashableCleanupJob
+  def perform（ゴミ箱、深さ）
+    trashable.cleanup（深さ）
+  終わり
+終わり
+「」
+
+これは、GlobalID :: Identificationが混在するすべてのクラスで機能します。
+デフォルトでは、Active Recordクラスに混在しています。
+
+
+##サポートされているキューシステム
+
+Active Jobには、複数のキューバックエンド（Sidekiq、
+Resque、Delayed Jobなど）。アダプターの最新リストを取得するには
+[ActiveJob :: QueueAdapters]（https://api.rubyonrails.org/classes/ActiveJob/QueueAdapters.html）のAPIドキュメントを参照してください。
+
+**注意：**新しいアダプタのプルリクエストは受け付けていません。我々
+ライブラリの作成者がActiveJobアダプターを
+彼らの宝石、またはスタンドアロンの宝石として。これに関する議論については、
+次のPR：[23311]（https://github.com/rails/rails/issues/23311#issuecomment-176275718）、
+[21406]（https://github.com/rails/rails/pull/21406#issuecomment-138813484）、および[＃32285]（https://github.com/rails/rails/pull/32285）。
+
+##補助宝石
+
+* [activejob-stats]（https://github.com/seuros/activejob-stats）
+
+##ダウンロードとインストール
+
+RubyGemsで最新バージョンのActive Jobをインストールできます。
+
+「」
+  $ gem install activejob
+「」
+
+ソースコードは、GitHubのRailsプロジェクトの一部としてダウンロードできます。
+
+* https://github.com/rails/rails/tree/master/activejob
+
+##ライセンス
+
+アクティブジョブはMITライセンスでリリースされています。
+
+* https://opensource.org/licenses/MIT
+
+
+＃＃ サポート
+
+APIドキュメントは次の場所にあります。
+
+* https://api.rubyonrails.org
+
+Ruby on Railsプロジェクトのバグレポートはこちらから提出できます。
+
+* https://github.com/rails/rails/issues
+
+機能のリクエストは、以下のrails-coreメーリングリストで議論する必要があります。
 
 * https://discuss.rubyonrails.org/c/rubyonrails-core

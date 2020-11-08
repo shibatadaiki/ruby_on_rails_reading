@@ -1,9 +1,12 @@
+# done
+
 # frozen_string_literal: true
 
 require "active_support/core_ext/object/try"
 
 module ActiveModel
   module Type
+    # オブジェクトの属性に型定義された時の処理をするためのClass
     class Float < Value # :nodoc:
       include Helpers::Numeric
 
@@ -11,6 +14,7 @@ module ActiveModel
         :float
       end
 
+      # castで文字列を返す
       def type_cast_for_schema(value)
         return "::Float::NAN" if value.try(:nan?)
         case value
@@ -21,6 +25,7 @@ module ActiveModel
       end
 
       private
+        # castでto_f処理的なものをかけたものを返す
         def cast_value(value)
           case value
           when ::Float then value

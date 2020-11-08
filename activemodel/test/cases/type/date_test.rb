@@ -1,3 +1,5 @@
+# done
+
 # frozen_string_literal: true
 
 require "cases/helper"
@@ -7,6 +9,7 @@ module ActiveModel
     class DateTest < ActiveModel::TestCase
       def test_type_cast_date
         type = Type::Date.new
+        # 時間を作れなかったらnilになる
         assert_nil type.cast(nil)
         assert_nil type.cast("")
         assert_nil type.cast(" ")
@@ -15,6 +18,7 @@ module ActiveModel
         now = ::Time.now.utc
         values_hash = { 1 => now.year, 2 => now.mon, 3 => now.mday }
         date_string = now.strftime("%F")
+        #　castしてもstrftimeで同一の文字列になる
         assert_equal date_string, type.cast(date_string).strftime("%F")
         assert_equal date_string, type.cast(values_hash).strftime("%F")
       end
@@ -22,6 +26,7 @@ module ActiveModel
       def test_returns_correct_year
         type = Type::Date.new
 
+        #　Hash値をcastしたらDate.newと同じになる
         time = ::Time.utc(1, 1, 1)
         date = ::Date.new(time.year, time.mon, time.mday)
 

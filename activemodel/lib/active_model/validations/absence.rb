@@ -1,30 +1,37 @@
+# done
+
 # frozen_string_literal: true
 
 module ActiveModel
   module Validations
     # == \Active \Model Absence Validator
+    # 具象：不在バリデーターの処理を追加
     class AbsenceValidator < EachValidator #:nodoc:
       def validate_each(record, attr_name, value)
+        # present検証を追加 -> 「if value.present?」であれば「record.errors」が発生、
+        # と言うのがRailsModelのバリデーションの仕組み
         record.errors.add(attr_name, :present, **options) if value.present?
       end
     end
 
     module HelperMethods
-      # Validates that the specified attributes are blank (as defined by
-      # Object#present?). Happens by default on save.
+      #＃指定された属性が空白であることを検証します（
+      #＃Object＃present？）。 保存時にデフォルトで発生します。
       #
       #   class Person < ActiveRecord::Base
       #     validates_absence_of :first_name
       #   end
       #
-      # The first_name attribute must be in the object and it must be blank.
+      #＃first_name属性はオブジェクト内にあり、空白である必要があります。
+      #＃
+      #＃設定オプション：
+      #＃* <tt>：message </ tt>-カスタムエラーメッセージ（デフォルトは「空白である必要があります」）。
+      # ＃
+      # ＃すべてのバリデーターがサポートするデフォルトのオプションのリストもあります：
+      # ＃+：if +、+：unless +、+：on +、+：allow_nil +、+：allow_blank +、+：strict +。
+      # ＃詳細は、<tt> ActiveModel :: Validations＃validates </ tt>を参照してください
       #
-      # Configuration options:
-      # * <tt>:message</tt> - A custom error message (default is: "must be blank").
-      #
-      # There is also a list of default options supported by every validator:
-      # +:if+, +:unless+, +:on+, +:allow_nil+, +:allow_blank+, and +:strict+.
-      # See <tt>ActiveModel::Validations#validates</tt> for more information
+      # AbsenceValidator => validate: に付与されたpresentバリデーション処理付与
       def validates_absence_of(*attr_names)
         validates_with AbsenceValidator, _merge_attributes(attr_names)
       end

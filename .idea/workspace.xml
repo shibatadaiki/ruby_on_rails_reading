@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eef7a46e-f152-42de-8fd6-047dfed8c8fc" name="Default Changelist" comment="" />
+    <list default="true" id="eef7a46e-f152-42de-8fd6-047dfed8c8fc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1aiPTzf724yrZjmW9fcLV234sqF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -15,9 +21,26 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/activesupport/test" />
+      <recent name="$PROJECT_DIR$/activesupport" />
+      <recent name="$PROJECT_DIR$/guides/assets" />
+      <recent name="$PROJECT_DIR$/tools" />
+      <recent name="$PROJECT_DIR$/railties/test" />
+    </key>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -44,7 +67,11 @@
       <updated>1587215452287</updated>
       <workItem from="1587215454795" duration="1176000" />
       <workItem from="1587226814728" duration="21000" />
-      <workItem from="1592834733757" duration="3230000" />
+      <workItem from="1592834733757" duration="28659000" />
+      <workItem from="1593363477151" duration="213000" />
+      <workItem from="1593363886908" duration="1438000" />
+      <workItem from="1593468301722" duration="7930000" />
+      <workItem from="1604437482688" duration="1726000" />
     </task>
     <servers />
   </component>
@@ -52,9 +79,31 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2305" y="150" width="670" height="676" key="search.everywhere.popup" timestamp="1592840910247">
+    <state x="2342" y="249" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593867467893">
       <screen x="1680" y="-91" width="1920" height="1080" />
     </state>
-    <state x="2305" y="150" width="670" height="676" key="search.everywhere.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1592840910247" />
+    <state x="2342" y="249" key="#com.intellij.fileTypes.FileTypeChooser/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593867467893" />
+    <state x="2149" y="88" key="SettingsEditor" timestamp="1593364115146">
+      <screen x="1680" y="-91" width="1920" height="1080" />
+    </state>
+    <state x="2149" y="88" key="SettingsEditor/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593364063723" />
+    <state x="2149" y="88" key="SettingsEditor/1680.-91.1920.1080/0.23.1680.1027@1680.-91.1920.1080" timestamp="1593364115146" />
+    <state width="500" height="445" key="SwitcherDM" timestamp="1596310486162">
+      <screen x="1680" y="-91" width="1920" height="1080" />
+    </state>
+    <state width="500" height="445" key="SwitcherDM/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1596310486162" />
+    <state x="2643" y="235" width="762" height="518" key="find.popup" timestamp="1596393051643">
+      <screen x="1680" y="-91" width="1920" height="1080" />
+    </state>
+    <state x="2643" y="235" width="762" height="518" key="find.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1596393051643" />
+    <state x="2643" y="235" width="762" height="518" key="find.popup/1680.-91.1920.1080/0.23.1680.1027@1680.-91.1920.1080" timestamp="1593647375324" />
+    <state x="2305" y="210" key="run.anything.popup" timestamp="1593922992044">
+      <screen x="1680" y="-91" width="1920" height="1080" />
+    </state>
+    <state x="2305" y="210" key="run.anything.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593922992044" />
+    <state x="2305" y="150" width="670" height="676" key="search.everywhere.popup" timestamp="1593644691690">
+      <screen x="1680" y="-91" width="1920" height="1080" />
+    </state>
+    <state x="2305" y="150" width="670" height="676" key="search.everywhere.popup/1680.-91.1920.1080/0.0.1680.1050@1680.-91.1920.1080" timestamp="1593644691690" />
   </component>
 </project>
